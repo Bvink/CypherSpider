@@ -50,31 +50,30 @@ public class Database {
         List<String> productAttributes = product.getAttributes();
         List<String> productValues = product.getValues();
 
-        String query = "MERGE (p:Product { name : '" + name + "', productnumber: '" + productNumber + "', price : '" + price + "', date: '" + getDate() + "' })";
-
         ExecutionEngine engine = new ExecutionEngine(graphDb);
-        engine.execute(query);
+
+        String query = "MERGE (p:Product { name : '" + name + "', productnumber: '" + productNumber + "', price : '" + price + "', date: '" + getDate() + "' })";
+        executeQuery(query, engine);
 
         query = "MERGE (w:Website { url : '" + site + "' })";
-
-        engine.execute(query);
+        executeQuery(query, engine);
 
         query = "MATCH (p:Product),(w:Website) "
                 + " WHERE p.name = '" + name + "' AND p.price ='" + price + "' AND w.url = '" + site + "'"
                 + " MERGE (p)-[r:BELONGS_TO]->(w) ";
 
-        engine.execute(query);
+        executeQuery(query, engine);
 
         if (productAttributes.size() == productValues.size()) {
             for (int i = 0; i < productAttributes.size() && i < productValues.size(); i++) {
                 query = "MERGE (a:Attribute { type : '" + productAttributes.get(i) + "', value : '" + productValues.get(i) + "' })";
+                executeQuery(query, engine);
 
-                engine.execute(query);
 
                 query = "MATCH (p:Product),(a:Attribute) "
                         + " WHERE p.name = '" + name + "' AND p.price ='" + price + "' AND a.type = '" + productAttributes.get(i) + "' AND a.value = '" + productValues.get(i) + "'"
                         + " MERGE (p)-[r:HAS_PROPERTY]->(a) ";
-                engine.execute(query);
+                executeQuery(query, engine);
             }
         }
     }
@@ -83,5 +82,10 @@ public class Database {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);
+    }
+
+    private void executeQuery(String query, ExecutionEngine engine) {
+        System.out.println("method query\n" + query);
+        engine.execute(query);
     }
 }
