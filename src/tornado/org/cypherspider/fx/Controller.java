@@ -22,11 +22,11 @@ public class Controller implements Initializable {
     @FXML private TextArea output;
     @FXML private TextArea query;
 
-    private static final Database db = new Database();
+    private static final Database DB = new Database();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        db.createDB();
+        DB.createDB();
         final Crawler crawl = new Crawler();
 
         fetchInfoButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -34,21 +34,21 @@ public class Controller implements Initializable {
             public void handle(ActionEvent actionEvent) {
                 output.setText("");
 
-                output.setText(crawl.crawl(input.getText(), db));
+                output.setText(crawl.crawl(input.getText(), DB));
             }
         });
 
         queryButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                output.setText(db.query(query.getText()));
+                output.setText(DB.query(query.getText()));
             }
         });
 
     }
 
     public static void shutdownDB() {
-        db.registerShutdownHook();
+        DB.registerShutdownHook();
     }
 
 }
