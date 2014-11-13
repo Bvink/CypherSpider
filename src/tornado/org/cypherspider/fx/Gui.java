@@ -2,10 +2,12 @@ package tornado.org.cypherspider.fx;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class Gui extends Application {
 
@@ -24,6 +26,14 @@ public class Gui extends Application {
                         setResizable(false);
                         show();
                     }};
+
+                    stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                        public void handle(WindowEvent we) {
+                            System.out.println("Shutting down graphDB...");
+                            Controller.shutdownDB();
+                        }
+                    });
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

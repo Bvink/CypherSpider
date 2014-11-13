@@ -16,15 +16,21 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
-    @FXML private Button fetchInfoButton;
-    @FXML private Button queryButton;
-    @FXML private TextField input;
-    @FXML private TextArea output;
-    @FXML private TextArea query;
+    @FXML
+    private Button fetchInfoButton;
+    @FXML
+    private Button queryButton;
+    @FXML
+    private TextField input;
+    @FXML
+    private TextArea output;
+    @FXML
+    private TextArea query;
 
+    private static final Database db = new Database();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        final Database db = new Database();
+
         db.createDB();
         final Crawler crawl = new Crawler();
 
@@ -44,6 +50,10 @@ public class Controller implements Initializable {
             }
         });
 
+    }
+
+    public static void shutdownDB() {
+        db.registerShutdownHook();
     }
 
 }
