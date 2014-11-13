@@ -15,7 +15,7 @@ public class Crawler {
     final String site = "https://www.alternate.nl";
     final String productLocation = "/html/product/";
     final String CURRENCY_SYMBOL = "€";
-    private static final int META_INDEX = 7;
+    private final int META_INDEX = 7;
 
     public String crawl(String input, Database db) {
 
@@ -59,7 +59,7 @@ public class Crawler {
         return Jsoup.connect(site).get();
     }
 
-    private static List<String> getProductAttributes(Document doc) {
+    private List<String> getProductAttributes(Document doc) {
         Elements firstRow = doc.getElementsByClass("techDataCol1");
         List<String> productAttributes = new ArrayList();
         for (Element e : firstRow) {
@@ -68,7 +68,7 @@ public class Crawler {
         return productAttributes;
     }
 
-    private static List<String> getProductValues(Document doc) {
+    private List<String> getProductValues(Document doc) {
         Elements secondRow = doc.getElementsByClass("techDataCol2");
         List<String> productValues = new ArrayList();
         for (Element e : secondRow) {
@@ -77,7 +77,7 @@ public class Crawler {
         return productValues;
     }
 
-    private static StringBuilder combineValues(StringBuilder s, List<String> productAttributes, List<String> productValues) {
+    private StringBuilder combineValues(StringBuilder s, List<String> productAttributes, List<String> productValues) {
         List<String> combined = new ArrayList();
         if (productAttributes.size() == productValues.size()) {
             for (int i = 0; i < productAttributes.size() && i < productValues.size(); i++) {
@@ -92,26 +92,26 @@ public class Crawler {
         return s;
     }
 
-    private static String formatPrice(String p) {
+    private String formatPrice(String p) {
         return p.substring(2, p.length() - 1).replace(",", ".");
     }
 
-    public static String getElementText(String element, Document doc) throws IOException {
+    public String getElementText(String element, Document doc) throws IOException {
 
         Element e = doc.select("[itemprop=" + element + "]").first();
 
         return e.text();
     }
 
-    private static String getProduct(Document doc) throws Exception {
+    private String getProduct(Document doc) throws Exception {
         return getElementText("brand", doc) + " " + doc.select("meta").get(META_INDEX).attr("content");
     }
 
-    private static String getPrice(Document doc) throws Exception {
+    private String getPrice(Document doc) throws Exception {
         return formatPrice(getElementText("price", doc));
     }
 
-    private static void createProductNodes(Database db, Product product) {
+    private void createProductNodes(Database db, Product product) {
         db.createProductNodes(product);
     }
 }
