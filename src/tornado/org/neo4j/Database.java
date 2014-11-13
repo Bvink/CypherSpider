@@ -2,19 +2,13 @@ package tornado.org.neo4j;
 
 import org.neo4j.cypher.javacompat.ExecutionEngine;
 import org.neo4j.cypher.javacompat.ExecutionResult;
-import org.neo4j.graphalgo.impl.util.PriorityMap;
 import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-import org.neo4j.helpers.collection.IteratorUtil;
 
-import javax.swing.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class Database {
 
@@ -44,7 +38,7 @@ public class Database {
         ExecutionEngine engine = new ExecutionEngine(graphDb);
         ExecutionResult result;
         result = engine.execute(vraag);
-        String dump=result.dumpToString();
+        String dump = result.dumpToString();
         return dump;
     }
 
@@ -60,7 +54,7 @@ public class Database {
         engine.execute(query);
 
         query = "MATCH (p:Product),(w:Website) "
-                + " WHERE p.name = '" + product +"' AND p.price ='" + price + "' AND w.url = '" + site + "'"
+                + " WHERE p.name = '" + product + "' AND p.price ='" + price + "' AND w.url = '" + site + "'"
                 + " MERGE (p)-[r:BELONGS_TO]->(w) ";
 
         engine.execute(query);
@@ -72,7 +66,7 @@ public class Database {
                 engine.execute(query);
 
                 query = "MATCH (p:Product),(a:Attribute) "
-                        + " WHERE p.name = '" + product +"' AND p.price ='" + price + "' AND a.type = '" + productAttributes.get(i) + "' AND a.value = '" + productValues.get(i) + "'"
+                        + " WHERE p.name = '" + product + "' AND p.price ='" + price + "' AND a.type = '" + productAttributes.get(i) + "' AND a.value = '" + productValues.get(i) + "'"
                         + " MERGE (p)-[r:HAS_PROPERTY]->(a) ";
                 engine.execute(query);
             }

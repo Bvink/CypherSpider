@@ -1,7 +1,6 @@
 package tornado.org.neo4j;
 
 import org.neo4j.graphdb.Label;
-
 import org.neo4j.graphdb.RelationshipType;
 
 public class Relations {
@@ -20,6 +19,5 @@ public class Relations {
         public static final String FROM = "from";
     }
 
-   
 
 }

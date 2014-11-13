@@ -32,7 +32,7 @@ public class Crawler {
             s.append("Prijs: ");
             s.append(CURRENCY_SYMBOL);
             String price = getPrice(doc);
-            price =     price.replace("-", "00");
+            price = price.replace("-", "00");
             s.append(price);
             s.append(System.getProperty("line.separator"));
             List<String> productAttributes = getProductAttributes(doc);
@@ -84,7 +84,7 @@ public class Crawler {
     }
 
     private static String formatPrice(String p) {
-        String price = p.substring(2,p.length()-1).replace("," , ".");
+        String price = p.substring(2, p.length() - 1).replace(",", ".");
         return price;
     }
 
