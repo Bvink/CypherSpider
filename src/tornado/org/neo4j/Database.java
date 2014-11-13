@@ -69,7 +69,6 @@ public class Database {
                 query = "MERGE (a:Attribute { type : '" + productAttributes.get(i) + "', value : '" + productValues.get(i) + "' })";
                 executeQuery(query, engine);
 
-
                 query = "MATCH (p:Product),(a:Attribute) "
                         + " WHERE p.name = '" + name + "' AND p.price ='" + price + "' AND a.type = '" + productAttributes.get(i) + "' AND a.value = '" + productValues.get(i) + "'"
                         + " MERGE (p)-[r:HAS_PROPERTY]->(a) ";
@@ -78,14 +77,14 @@ public class Database {
         }
     }
 
+    private void executeQuery(String query, ExecutionEngine engine) {
+        System.out.println("method query\n" + query);
+        engine.execute(query);
+    }
+
     private String getDate() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);
-    }
-
-    private void executeQuery(String query, ExecutionEngine engine) {
-        System.out.println("method query\n" + query);
-        engine.execute(query);
     }
 }
