@@ -16,16 +16,11 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
-    @FXML
-    private Button fetchInfoButton;
-    @FXML
-    private Button queryButton;
-    @FXML
-    private TextField input;
-    @FXML
-    private TextArea output;
-    @FXML
-    private TextArea query;
+    @FXML private Button fetchInfoButton;
+    @FXML private Button queryButton;
+    @FXML private TextField input;
+    @FXML private TextArea output;
+    @FXML private TextArea query;
 
     private static final Database db = new Database();
 
