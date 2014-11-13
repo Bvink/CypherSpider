@@ -44,13 +44,13 @@ public class Database {
     public void createProductNodes(Product product) {
 
         String productNumber = product.getProductNumber();
-        String productName = product.getProductName();
+        String name = product.getName();
         String price = product.getPrice();
         String site = product.getSite();
         List<String> productAttributes = product.getAttributes();
         List<String> productValues = product.getValues();
 
-        String query = "MERGE (p:Product { name : '" + productName + "', productnumber: '" + productNumber + "', price : '" + price + "', date: '" + getDate() + "' })";
+        String query = "MERGE (p:Product { name : '" + name + "', productnumber: '" + productNumber + "', price : '" + price + "', date: '" + getDate() + "' })";
 
         ExecutionEngine engine = new ExecutionEngine(graphDb);
         engine.execute(query);
@@ -60,7 +60,7 @@ public class Database {
         engine.execute(query);
 
         query = "MATCH (p:Product),(w:Website) "
-                + " WHERE p.name = '" + productName + "' AND p.price ='" + price + "' AND w.url = '" + site + "'"
+                + " WHERE p.name = '" + name + "' AND p.price ='" + price + "' AND w.url = '" + site + "'"
                 + " MERGE (p)-[r:BELONGS_TO]->(w) ";
 
         engine.execute(query);
@@ -72,7 +72,7 @@ public class Database {
                 engine.execute(query);
 
                 query = "MATCH (p:Product),(a:Attribute) "
-                        + " WHERE p.name = '" + productName + "' AND p.price ='" + price + "' AND a.type = '" + productAttributes.get(i) + "' AND a.value = '" + productValues.get(i) + "'"
+                        + " WHERE p.name = '" + name + "' AND p.price ='" + price + "' AND a.type = '" + productAttributes.get(i) + "' AND a.value = '" + productValues.get(i) + "'"
                         + " MERGE (p)-[r:HAS_PROPERTY]->(a) ";
                 engine.execute(query);
             }

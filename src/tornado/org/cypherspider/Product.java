@@ -5,7 +5,7 @@ import java.util.List;
 public class Product {
 
     private String site;
-    private String productName;
+    private String name;
     private String price;
     private String productNumber;
     private List<String> attributes;
@@ -19,12 +19,12 @@ public class Product {
         return site;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
     public void setPrice(String price) {
@@ -35,7 +35,7 @@ public class Product {
         return price;
     }
 
-    public void setProductNumber(String productNumber) {
+    public void setID(String productNumber) {
         this.productNumber = productNumber;
     }
 

@@ -1,4 +1,4 @@
-package tornado.org.cypherspider.fx;
+package tornado.org.fx;
 
 import javafx.application.Application;
 import javafx.application.Platform;

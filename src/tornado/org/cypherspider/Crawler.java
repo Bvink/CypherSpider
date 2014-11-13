@@ -26,8 +26,8 @@ public class Crawler {
         try {
             Document doc = getDoc(crawlpage);
             s.append("Product: ");
-            String productName = getProduct(doc);
-            s.append(productName);
+            String name = getProduct(doc);
+            s.append(name);
             s.append(System.getProperty("line.separator"));
             s.append("Prijs: ");
             s.append(CURRENCY_SYMBOL);
@@ -41,8 +41,8 @@ public class Crawler {
 
             Product product = new Product();
             product.setSite(site);
-            product.setProductName(productName);
-            product.setProductNumber(productNumber);
+            product.setName(name);
+            product.setID(productNumber);
             product.setPrice(price);
             product.setAttributes(productAttributes);
             product.setValues(productValues);

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="784.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tornado.org.cypherspider.fx.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="784.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tornado.org.fx.Controller">
    <children>
       <Button fx:id="fetchInfoButton" layoutX="12.0" layoutY="45.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Enter product ID" />
       <TextField fx:id="input" layoutX="14.0" layoutY="13.0" prefHeight="25.0" prefWidth="125.0" />
