@@ -4,6 +4,7 @@ import org.neo4j.cypher.javacompat.ExecutionEngine;
 import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import tornado.org.cypherspider.Product;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -31,20 +32,25 @@ public class Database {
     }
 
     public String query(String query) {
-        String vraag = query;
 
-        System.out.println("method query\n" + vraag);
+        System.out.println("method query\n" + query);
 
         ExecutionEngine engine = new ExecutionEngine(graphDb);
         ExecutionResult result;
-        result = engine.execute(vraag);
-        String dump = result.dumpToString();
-        return dump;
+        result = engine.execute(query);
+        return result.dumpToString();
     }
 
-    public void createProductNodes(String site, String product, String price, String productNumber, List<String> productAttributes, List<String> productValues) {
+    public void createProductNodes(Product product) {
 
-        String query = "MERGE (p:Product { name : '" + product + "', productnumber: '" + productNumber + "', price : '" + price + "', date: '" + getDate() + "' })";
+        String productNumber = product.getProductNumber();
+        String productName = product.getProductName();
+        String price = product.getPrice();
+        String site = product.getSite();
+        List<String> productAttributes = product.getAttributes();
+        List<String> productValues = product.getValues();
+
+        String query = "MERGE (p:Product { name : '" + productName + "', productnumber: '" + productNumber + "', price : '" + price + "', date: '" + getDate() + "' })";
 
         ExecutionEngine engine = new ExecutionEngine(graphDb);
         engine.execute(query);
@@ -54,7 +60,7 @@ public class Database {
         engine.execute(query);
 
         query = "MATCH (p:Product),(w:Website) "
-                + " WHERE p.name = '" + product + "' AND p.price ='" + price + "' AND w.url = '" + site + "'"
+                + " WHERE p.name = '" + productName + "' AND p.price ='" + price + "' AND w.url = '" + site + "'"
                 + " MERGE (p)-[r:BELONGS_TO]->(w) ";
 
         engine.execute(query);

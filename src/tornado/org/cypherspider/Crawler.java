@@ -38,9 +38,18 @@ public class Crawler {
             List<String> productAttributes = getProductAttributes(doc);
             List<String> productValues = getProductValues(doc);
             s.append(combineValues(s, productAttributes, productValues));
-            createProductNodes(db, site, productName, price, productNumber, productAttributes, productValues);
-        } catch (Exception e) {
 
+            Product product = new Product();
+            product.setSite(site);
+            product.setProductName(productName);
+            product.setProductNumber(productNumber);
+            product.setPrice(price);
+            product.setAttributes(productAttributes);
+            product.setValues(productValues);
+
+            createProductNodes(db, product);
+        } catch (Exception e) {
+            System.out.println("The crawler has failed retrieving data");
         }
 
         return s.toString();
@@ -75,8 +84,8 @@ public class Crawler {
                 combined.add(productAttributes.get(i) + " " + productValues.get(i));
             }
         }
-        for (int i = 0; i < combined.size(); i++) {
-            s.append(combined.get(i));
+        for (String c : combined) {
+            s.append(c);
             s.append(System.getProperty("line.separator"));
         }
 
@@ -84,8 +93,7 @@ public class Crawler {
     }
 
     private static String formatPrice(String p) {
-        String price = p.substring(2, p.length() - 1).replace(",", ".");
-        return price;
+        return p.substring(2, p.length() - 1).replace(",", ".");
     }
 
     public static String getElementText(String element, Document doc) throws IOException {
@@ -103,7 +111,7 @@ public class Crawler {
         return formatPrice(getElementText("price", doc));
     }
 
-    private static void createProductNodes(Database db, String site, String productName, String Price, String productNumber, List<String> productAttributes, List<String> productValues) {
-        db.createProductNodes(site, productName, Price, productNumber, productAttributes, productValues);
+    private static void createProductNodes(Database db, Product product) {
+        db.createProductNodes(product);
     }
 }
