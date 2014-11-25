@@ -49,7 +49,7 @@ public class Crawler {
 
             createProductNodes(db, product);
         } catch (Exception e) {
-            System.out.println("The crawler has failed retrieving data");
+            s.append("The crawler has failed retrieving data");
         }
 
         return s.toString();
@@ -61,7 +61,7 @@ public class Crawler {
 
     private List<String> getProductAttributes(Document doc) {
         Elements firstRow = doc.getElementsByClass("techDataCol1");
-        List<String> productAttributes = new ArrayList();
+        List<String> productAttributes = new ArrayList<>();
         for (Element e : firstRow) {
             productAttributes.add(e.text());
         }
@@ -70,7 +70,7 @@ public class Crawler {
 
     private List<String> getProductValues(Document doc) {
         Elements secondRow = doc.getElementsByClass("techDataCol2");
-        List<String> productValues = new ArrayList();
+        List<String> productValues = new ArrayList<>();
         for (Element e : secondRow) {
             productValues.add(e.text());
         }
@@ -78,7 +78,7 @@ public class Crawler {
     }
 
     private StringBuilder combineValues(StringBuilder s, List<String> productAttributes, List<String> productValues) {
-        List<String> combined = new ArrayList();
+        List<String> combined = new ArrayList<>();
         if (productAttributes.size() == productValues.size()) {
             for (int i = 0; i < productAttributes.size() && i < productValues.size(); i++) {
                 combined.add(productAttributes.get(i) + " " + productValues.get(i));
