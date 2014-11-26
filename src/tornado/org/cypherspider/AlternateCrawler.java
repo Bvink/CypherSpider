@@ -22,7 +22,7 @@ public class AlternateCrawler {
         String crawlpage = SITE + PRODUCT_LOCATION + productNumber;
         StringBuilder sb = new StringBuilder();
         try {
-            Document doc = getDoc(crawlpage);
+            Document doc = Jsoup.connect(crawlpage).get();
             sb.append("Product: ");
             String name = getProduct(doc);
             sb.append(name);
@@ -45,16 +45,12 @@ public class AlternateCrawler {
             product.setAttributes(productAttributes);
             product.setValues(productValues);
 
-            createProductNodes(db, product);
+            db.createProductNodes(product);
         } catch (Exception e) {
             sb.append("The crawler has failed retrieving data");
         }
 
         return sb.toString();
-    }
-
-    private Document getDoc(String site) throws Exception {
-        return Jsoup.connect(site).get();
     }
 
     private List<String> getProductAttributes(Document doc) {
@@ -111,9 +107,5 @@ public class AlternateCrawler {
 
     private String getPrice(Document doc) throws Exception {
         return formatPrice(getElementText("price", doc));
-    }
-
-    private void createProductNodes(Database db, Product product) {
-        db.createProductNodes(product);
     }
 }
