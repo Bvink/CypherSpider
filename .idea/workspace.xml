@@ -32,8 +32,8 @@
       <file leaf-file-name="ProductDatabase.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tornado/org/neo4j/ProductDatabase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33278418" vertical-offset="750" max-vertical-offset="1360">
-              <caret line="72" column="80" selection-start-line="72" selection-start-column="75" selection-end-line="72" selection-end-column="80" />
+            <state vertical-scroll-proportion="0.028006589" vertical-offset="578" max-vertical-offset="1360">
+              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -681,7 +681,11 @@
       <created>1417021707874</created>
       <updated>1417021707874</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="CypherSpider Price converted from String to Long">
+      <created>1417022106621</created>
+      <updated>1417022106621</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1139,8 +1143,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tornado/org/neo4j/ProductDatabase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33278418" vertical-offset="750" max-vertical-offset="1360">
-          <caret line="72" column="80" selection-start-line="72" selection-start-column="75" selection-end-line="72" selection-end-column="80" />
+        <state vertical-scroll-proportion="0.028006589" vertical-offset="578" max-vertical-offset="1360">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
           <folding />
         </state>
       </provider>
