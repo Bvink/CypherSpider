@@ -52,14 +52,14 @@ public class ProductDatabase {
 
         ExecutionEngine engine = new ExecutionEngine(graphDb);
 
-        String query = "MERGE (p:Product { name : '" + name + "', productnumber: '" + productNumber + "', price : '" + price + "', date: '" + getDateTime() + "' })";
+        String query = "MERGE (p:Product { name : '" + name + "', productnumber: '" + productNumber + "', price : " + price + ", date: '" + getDateTime() + "' })";
         executeQuery(query, engine);
 
         query = "MERGE (w:Website { url : '" + site + "' })";
         executeQuery(query, engine);
 
         query = "MATCH (p:Product),(w:Website) "
-                + " WHERE p.name = '" + name + "' AND p.price ='" + price + "' AND w.url = '" + site + "'"
+                + " WHERE p.name = '" + name + "' AND p.price =" + price + " AND w.url = '" + site + "'"
                 + " MERGE (p)-[r:BELONGS_TO]->(w) ";
 
         executeQuery(query, engine);
@@ -70,7 +70,7 @@ public class ProductDatabase {
                 executeQuery(query, engine);
 
                 query = "MATCH (p:Product),(a:Attribute) "
-                        + " WHERE p.name = '" + name + "' AND p.price =" + price + " AND a.type = '" + productAttributes.get(i) + "' AND a.value = '" + productValues.get(i) + "'"
+                        + " WHERE p.name = '" + name + "' AND p.price =" + price + "' AND a.type = '" + productAttributes.get(i) + "' AND a.value = '" + productValues.get(i) + "'"
                         + " MERGE (p)-[r:HAS_PROPERTY]->(a) ";
                 executeQuery(query, engine);
             }
