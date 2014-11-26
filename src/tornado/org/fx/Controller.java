@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import tornado.org.cypherspider.AlternateCrawler;
-import tornado.org.neo4j.Database;
+import tornado.org.neo4j.ProductDatabase;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +22,7 @@ public class Controller implements Initializable {
     @FXML private TextArea output;
     @FXML private TextArea query;
 
-    private static final Database DB = new Database();
+    private static final ProductDatabase DB = new ProductDatabase();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

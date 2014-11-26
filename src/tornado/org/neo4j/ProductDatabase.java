@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class Database {
+public class ProductDatabase {
 
     private GraphDatabaseService graphDb;
     private final String DB_PATH = "c:/Neo4J";
@@ -52,7 +52,7 @@ public class Database {
 
         ExecutionEngine engine = new ExecutionEngine(graphDb);
 
-        String query = "MERGE (p:Product { name : '" + name + "', productnumber: '" + productNumber + "', price : '" + price + "', date: '" + getDate() + "' })";
+        String query = "MERGE (p:Product { name : '" + name + "', productnumber: '" + productNumber + "', price : '" + price + "', date: '" + getDateTime() + "' })";
         executeQuery(query, engine);
 
         query = "MERGE (w:Website { url : '" + site + "' })";
@@ -82,7 +82,7 @@ public class Database {
         engine.execute(query);
     }
 
-    private String getDate() {
+    private String getDateTime() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);

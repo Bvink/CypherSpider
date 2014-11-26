@@ -5,7 +5,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 
 import tornado.org.cypherspider.AlternateCrawler;
-import tornado.org.neo4j.Database;
+import tornado.org.neo4j.ProductDatabase;
 
 public class FindLinks {
     private static ArrayList<String> links = new ArrayList<>();
@@ -69,7 +69,7 @@ public class FindLinks {
 			}
 		}
 
-		final Database db = new Database();
+		final ProductDatabase db = new ProductDatabase();
 		db.createDB();
 
 		final AlternateCrawler alternateCrawler = new AlternateCrawler();

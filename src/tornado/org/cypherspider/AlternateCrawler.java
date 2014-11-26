@@ -4,7 +4,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import tornado.org.neo4j.Database;
+import tornado.org.neo4j.ProductDatabase;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class AlternateCrawler {
     private final String CURRENCY_SYMBOL = "€";
     private final int META_INDEX = 7;
 
-    public String crawl(String productNumber, Database db) {
+    public String crawl(String productNumber, ProductDatabase db) {
 
         String crawlpage = SITE + PRODUCT_LOCATION + productNumber;
         StringBuilder sb = new StringBuilder();
