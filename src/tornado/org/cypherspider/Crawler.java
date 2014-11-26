@@ -12,35 +12,33 @@ import java.util.List;
 
 public class Crawler {
 
-    final String site = "https://www.alternate.nl";
-    final String productLocation = "/html/product/";
-    final String CURRENCY_SYMBOL = "€";
+    private final String SITE = "https://www.alternate.nl";
+    private final String PRODUCT_LOCATION = "/html/product/";
+    private final String CURRENCY_SYMBOL = "€";
     private final int META_INDEX = 7;
 
-    public String crawl(String input, Database db) {
+    public String crawl(String productNumber, Database db) {
 
-
-        String productNumber = input;
-        String crawlpage = site + productLocation + productNumber;
-        StringBuilder s = new StringBuilder();
+        String crawlpage = SITE + PRODUCT_LOCATION + productNumber;
+        StringBuilder sb = new StringBuilder();
         try {
             Document doc = getDoc(crawlpage);
-            s.append("Product: ");
+            sb.append("Product: ");
             String name = getProduct(doc);
-            s.append(name);
-            s.append(System.getProperty("line.separator"));
-            s.append("Prijs: ");
-            s.append(CURRENCY_SYMBOL);
+            sb.append(name);
+            sb.append(System.getProperty("line.separator"));
+            sb.append("Prijs: ");
+            sb.append(CURRENCY_SYMBOL);
             String price = getPrice(doc);
             price = price.replace("-", "00");
-            s.append(price);
-            s.append(System.getProperty("line.separator"));
+            sb.append(price);
+            sb.append(System.getProperty("line.separator"));
             List<String> productAttributes = getProductAttributes(doc);
             List<String> productValues = getProductValues(doc);
-            s.append(combineValues(s, productAttributes, productValues));
+            sb.append(combineValues(sb, productAttributes, productValues));
 
             Product product = new Product();
-            product.setSite(site);
+            product.setSite(SITE);
             product.setName(name);
             product.setID(productNumber);
             product.setPrice(price);
@@ -49,10 +47,10 @@ public class Crawler {
 
             createProductNodes(db, product);
         } catch (Exception e) {
-            s.append("The crawler has failed retrieving data");
+            sb.append("The crawler has failed retrieving data");
         }
 
-        return s.toString();
+        return sb.toString();
     }
 
     private Document getDoc(String site) throws Exception {
@@ -62,8 +60,8 @@ public class Crawler {
     private List<String> getProductAttributes(Document doc) {
         Elements firstRow = doc.getElementsByClass("techDataCol1");
         List<String> productAttributes = new ArrayList<>();
-        for (Element e : firstRow) {
-            productAttributes.add(e.text());
+        for (Element element : firstRow) {
+            productAttributes.add(element.text());
         }
         return productAttributes;
     }
@@ -71,13 +69,13 @@ public class Crawler {
     private List<String> getProductValues(Document doc) {
         Elements secondRow = doc.getElementsByClass("techDataCol2");
         List<String> productValues = new ArrayList<>();
-        for (Element e : secondRow) {
-            productValues.add(e.text());
+        for (Element element : secondRow) {
+            productValues.add(element.text());
         }
         return productValues;
     }
 
-    private StringBuilder combineValues(StringBuilder s, List<String> productAttributes, List<String> productValues) {
+    private StringBuilder combineValues(StringBuilder sb, List<String> productAttributes, List<String> productValues) {
         List<String> combined = new ArrayList<>();
         if (productAttributes.size() == productValues.size()) {
             for (int i = 0; i < productAttributes.size() && i < productValues.size(); i++) {
@@ -85,26 +83,30 @@ public class Crawler {
             }
         }
         for (String c : combined) {
-            s.append(c);
-            s.append(System.getProperty("line.separator"));
+            sb.append(c);
+            sb.append(System.getProperty("line.separator"));
         }
 
-        return s;
+        return sb;
     }
 
     private String formatPrice(String p) {
         return p.substring(2, p.length() - 1).replace(",", ".");
     }
 
-    public String getElementText(String element, Document doc) throws IOException {
+    public String getElementText(String elementName, Document doc) throws IOException {
 
-        Element e = doc.select("[itemprop=" + element + "]").first();
+        Element element = doc.select("[itemprop=" + elementName + "]").first();
 
-        return e.text();
+        return element.text();
     }
 
     private String getProduct(Document doc) throws Exception {
-        return getElementText("brand", doc) + " " + doc.select("meta").get(META_INDEX).attr("content");
+        StringBuilder sb = new StringBuilder();
+        sb.append(getElementText("brand", doc));
+        sb.append(" ");
+        sb.append(doc.select("meta").get(META_INDEX).attr("content"));
+        return sb.toString();
     }
 
     private String getPrice(Document doc) throws Exception {
