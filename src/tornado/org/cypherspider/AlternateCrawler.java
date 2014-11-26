@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Crawler {
+public class AlternateCrawler {
 
     private final String SITE = "https://www.alternate.nl";
     private final String PRODUCT_LOCATION = "/html/product/";

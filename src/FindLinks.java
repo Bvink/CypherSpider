@@ -2,23 +2,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.jsoup.Jsoup;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
-import tornado.org.cypherspider.Crawler;
+import tornado.org.cypherspider.AlternateCrawler;
 import tornado.org.neo4j.Database;
 
 public class FindLinks {
-	static ArrayList<String> links = new ArrayList<>();
-	static ArrayList<String> productlinks = new ArrayList<>();
-	static ArrayList<String> productnr = new ArrayList<>();
+    private static ArrayList<String> links = new ArrayList<>();
+    private static ArrayList<String> productlinks = new ArrayList<>();
+    private static ArrayList<String> productnr = new ArrayList<>();
 
-	static String productListingUrlModifier = "&size=500#listingResult";
-	String url = "http://www.alternate.nl/html/highlights/page.html?hgid=205&tgid=944&tk=7&lk=9276";
+    private static String productListingUrlModifier = "&size=500#listingResult";
+    private static String url = "http://www.alternate.nl/html/highlights/page.html?hgid=205&tgid=944&tk=7&lk=9276";
 
 	private static int sizeProductNr = 7;
 
@@ -77,7 +72,7 @@ public class FindLinks {
 		final Database db = new Database();
 		db.createDB();
 
-		final Crawler crawler = new Crawler();
+		final AlternateCrawler alternateCrawler = new AlternateCrawler();
 
 		for (int i = 0; i < productlinks.size(); i++) {
 
@@ -93,7 +88,7 @@ public class FindLinks {
 				productnr.add(nr);
 				// System.out.println(nr);
 
-				crawler.crawl(nr, db);
+                alternateCrawler.crawl(nr, db);
 
 			} catch (Exception exp) {
 				exp.printStackTrace();
