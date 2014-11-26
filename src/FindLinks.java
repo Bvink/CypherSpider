@@ -18,10 +18,11 @@ public class FindLinks {
 	static ArrayList<String> productnr = new ArrayList<>();
 
 	static String productListingUrlModifier = "&size=500#listingResult";
+	String url = "http://www.alternate.nl/html/highlights/page.html?hgid=205&tgid=944&tk=7&lk=9276";
+
 	private static int sizeProductNr = 7;
 
 	public final static void main(String[] args) throws IOException {
-		String url = "http://www.alternate.nl/html/highlights/page.html?hgid=205&tgid=944&tk=7&lk=9276";
 
 		org.jsoup.nodes.Document doc = Jsoup.connect(url).get();
 		Elements e = doc.getElementById("navTree").getElementsByTag("a");
@@ -31,7 +32,7 @@ public class FindLinks {
 
 		for (int i = 0; i < links.size(); i++) {
 			url = "http://www.alternate.nl" + links.get(i);
-			System.out.println("\n-------   " + url);
+			// System.out.println("\n-------   " + url);
 
 			try {
 				doc = Jsoup.connect(url).get();
@@ -56,13 +57,12 @@ public class FindLinks {
 
 				try {
 					doc = Jsoup.connect(url).get();
-					e = doc.getElementsByClass("productLink") ; 
-							//getElementById("listingResult")
-					
+					e = doc.getElementsByClass("productLink");
 
 					for (int j = 0; j < e.size(); j++) {
-						String plink = e.get(j).getElementsByTag("a").attr("href");
-						System.out.println(plink);
+						String plink = e.get(j).getElementsByTag("a")
+								.attr("href");
+						// System.out.println(plink);
 						productlinks.add(plink);
 
 					}
@@ -83,18 +83,18 @@ public class FindLinks {
 
 			try {
 				String producturl = productlinks.get(i);
-				System.out.println(producturl);
-				int startpoint = producturl.indexOf("/html/product/")+14;
+				// System.out.println(producturl);
+				int startpoint = producturl.indexOf("/html/product/") + 14;
 				String nr = producturl.substring(startpoint, startpoint
 						+ sizeProductNr);
 				nr = nr.replace("?", "");
 				nr = nr.replace("t", "");
-				
+
 				productnr.add(nr);
-				System.out.println(nr);
-				
+				// System.out.println(nr);
+
 				crawler.crawl(nr, db);
-				
+
 			} catch (Exception exp) {
 				exp.printStackTrace();
 			}
@@ -107,13 +107,14 @@ public class FindLinks {
 
 			String link = elements.get(i).attr("href");
 
-			System.out.println(i + "  " + elements.get(i).attr("href") + "\n");
+			// System.out.println(i + "  " + elements.get(i).attr("href") +
+			// "\n");
 
 			if (link.contains("/html/highlights/page")
 					|| link.contains("/html/product/")) {
 
 				if (!links.contains(link)) {
-					System.out.println("++++++adding link " + links.size());
+					// System.out.println("++++++adding link " + links.size());
 					links.add(link);
 				}
 			}
