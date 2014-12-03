@@ -8,6 +8,10 @@ public class Start {
 
     public static void main(String[] args) throws Exception {
 
-        Application.launch(Gui.class, (String[]) null);
+    	// FindLinksOnAlternate findLinks = new FindLinksOnAlternate();
+    	//findLinks.run();
+    	FindLinksOnMycom mycom = new FindLinksOnMycom() ; 
+    	mycom.run();
+      //  Application.launch(Gui.class, (String[]) null);
     }
 }

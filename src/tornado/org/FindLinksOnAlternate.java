@@ -1,3 +1,4 @@
+package tornado.org;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ import tornado.org.neo4j.ProductDatabase;
 /*
  * can ik weer committen
  */
-public class FindLinks extends Thread {
+public class FindLinksOnAlternate extends Thread {
 
 	private final CharSequence paternListinLink = "/html/product/listing";
 	private final String urlAlternate = "http://www.alternate.nl";
