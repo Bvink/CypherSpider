@@ -16,18 +16,18 @@ import tornado.org.neo4j.ProductDatabase;
  */
 public class FindLinksOnAlternate extends Thread {
 
-	private final CharSequence paternListinLink = "/html/product/listing";
-	private final String urlAlternate = "http://www.alternate.nl";
-	private final String paternProductLink = "/html/product/";
-	private final CharSequence paternNavigationLink = "/html/highlights/page";
-	private final String productListingUrlModifier = "&size=500#listingResult";
+	private static final CharSequence paternListinLink = "/html/product/listing";
+	private static final String urlAlternate = "http://www.alternate.nl";
+	private static final String paternProductLink = "/html/product/";
+	private static final CharSequence paternNavigationLink = "/html/highlights/page";
+	private static final String productListingUrlModifier = "&size=500#listingResult";
 
-	private ArrayList<String> links = new ArrayList<>();
-	private ArrayList<String> productlinks = new ArrayList<>();
-	private ArrayList<String> productnr = new ArrayList<>();
+	private static ArrayList<String> links = new ArrayList<>();
+	private static ArrayList<String> productlinks = new ArrayList<>();
+	private static ArrayList<String> productnr = new ArrayList<>();
 
 	private static org.jsoup.nodes.Document doc;
-	private Elements e;
+	private static Elements e;
 	private final ProductDatabase productDatabase = new ProductDatabase();
 
 	private final AlternateCrawler alternateCrawler = new AlternateCrawler();

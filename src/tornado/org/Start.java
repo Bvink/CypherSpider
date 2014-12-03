@@ -11,7 +11,7 @@ public class Start {
     	// FindLinksOnAlternate findLinks = new FindLinksOnAlternate();
     	//findLinks.run();
     	FindLinksOnMycom mycom = new FindLinksOnMycom() ; 
-    	mycom.run();
+    	mycom.Run();
       //  Application.launch(Gui.class, (String[]) null);
     }
 }
