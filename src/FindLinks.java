@@ -5,11 +5,14 @@ import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 
 import tornado.org.cypherspider.AlternateCrawler;
-import tornado.org.neo4j.Database;
+import tornado.org.neo4j.ProductDatabase;
 
 import tornado.org.cypherspider.AlternateCrawler;
 import tornado.org.neo4j.ProductDatabase;
 
+/*
+ * can ik weer committen
+ */
 public class FindLinks extends Thread {
 
 	private final CharSequence paternListinLink = "/html/product/listing";
