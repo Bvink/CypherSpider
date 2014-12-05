@@ -15,38 +15,49 @@ public class AlternateCrawler {
 
     public String crawl(String productNumber, ProductDatabase db) {
 
-        String crawlpage = CSConstants.ALTERNATE_URL + CSConstants.ALTERNATE_PRODUCT_LOCATION + productNumber;
+        String url = createUrl(productNumber);
+
         StringBuilder sb = new StringBuilder();
+
         try {
-            Document doc = Jsoup.connect(crawlpage).get();
-            sb.append(CSConstants.PRODUCT_OUTPUT_STR);
-            String name = getProduct(doc);
-            sb.append(name);
-            sb.append(CSConstants.LINE_SEPERATOR);
-            sb.append(CSConstants.PRIJS_OUTPUT_STR);
-            sb.append(CSConstants.EURO);
-            String price = getPrice(doc);
-            price = price.replace(CSConstants.DASH, CSConstants.DOUBLE_ZERO);
-            sb.append(price);
-            sb.append(System.getProperty(CSConstants.LINE_SEPERATOR));
-            List<String> productAttributes = getProductAttributes(doc);
-            List<String> productValues = getProductValues(doc);
-            sb.append(combineValues(sb, productAttributes, productValues));
+            Document doc = Jsoup.connect(url).get();
 
             Product product = new Product();
             product.setSite(CSConstants.ALTERNATE_URL);
-            product.setName(name);
+            product.setName(getProduct(doc));
             product.setID(productNumber);
-            product.setPrice(price);
-            product.setAttributes(productAttributes);
-            product.setValues(productValues);
+            product.setPrice(getPrice(doc).replace(CSConstants.DASH, CSConstants.DOUBLE_ZERO));
+            product.setAttributes(getProductAttributes(doc));
+            product.setValues(getProductValues(doc));
 
             db.createAlternateProductNodes(product);
+            sb = productPropertiesOutput(sb, product);
         } catch (Exception e) {
-            System.out.println(CSConstants.RETRIEVE_ERROR);
+            sb.append(CSConstants.RETRIEVE_ERROR);
         }
 
         return sb.toString();
+    }
+
+    private String createUrl(String productNumber) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(CSConstants.ALTERNATE_URL);
+        sb.append(CSConstants.ALTERNATE_PRODUCT_LOCATION);
+        sb.append(productNumber);
+        return sb.toString();
+    }
+
+    private StringBuilder productPropertiesOutput(StringBuilder sb, Product product) {
+        sb.append(CSConstants.PRODUCT_OUTPUT_STR);
+        sb.append(product.getName());
+        sb.append(CSConstants.LINE_SEPERATOR);
+        sb.append(CSConstants.PRIJS_OUTPUT_STR);
+        sb.append(CSConstants.EURO);
+        sb.append(product.getPrice());
+        sb.append(CSConstants.LINE_SEPERATOR);
+        sb.append(combineValues(product.getAttributes(), product.getValues()));
+
+        return sb;
     }
 
     private List<String> getProductAttributes(Document doc) {
@@ -67,8 +78,9 @@ public class AlternateCrawler {
         return productValues;
     }
 
-    private StringBuilder combineValues(StringBuilder sb, List<String> productAttributes, List<String> productValues) {
+    private StringBuilder combineValues(List<String> productAttributes, List<String> productValues) {
         List<String> combined = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
         if (productAttributes.size() == productValues.size()) {
             for (int i = 0; i < productAttributes.size() && i < productValues.size(); i++) {
                 combined.add(productAttributes.get(i) + " " + productValues.get(i));
