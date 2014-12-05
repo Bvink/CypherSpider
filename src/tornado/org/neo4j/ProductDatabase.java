@@ -129,7 +129,7 @@ public class ProductDatabase {
     }
 
     private void executeQuery(String query, ExecutionEngine engine) {
-        System.out.println(NEOConstants.QUERY_ANNOUNCER + query);
+        if (NEOConstants.SYSTEM_OUTPUT) { System.out.println(NEOConstants.QUERY_ANNOUNCER + query); }
         engine.execute(query);
     }
 

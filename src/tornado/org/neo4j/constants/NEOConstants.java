@@ -5,6 +5,8 @@ public class NEOConstants {
     public final static String DB_PATH = "c:/Neo4J";
     public final static String DB_SHUTDOWN_MESSAGE = "graphDB shut down.";
 
+    public final static Boolean SYSTEM_OUTPUT = true;
+
     public final static String QUERY_ANNOUNCER = "method query\n";
     public final static String DATE_FORMAT = "yyyy/MM/dd HH:mm:ss";
 
