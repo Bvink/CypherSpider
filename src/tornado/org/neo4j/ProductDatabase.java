@@ -5,55 +5,19 @@ import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import tornado.org.cypherspider.Product;
+import tornado.org.neo4j.constants.NEOConstants;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/*
- * TODO uitzoeken wrm dit gebeurt
- * 
- * Exception in thread "main" java.lang.OutOfMemoryError: GC overhead limit exceeded
-	at java.util.Arrays.copyOf(Unknown Source)
-	at org.neo4j.kernel.impl.nioneo.store.LongerShortString.decode(LongerShortString.java:766)
-	at org.neo4j.kernel.impl.nioneo.store.PropertyType$11.readProperty(PropertyType.java:271)
-	at org.neo4j.kernel.impl.api.store.DiskLayer.loadAllPropertiesOf(DiskLayer.java:476)
-	at org.neo4j.kernel.impl.api.store.DiskLayer.nodeGetAllProperties(DiskLayer.java:418)
-	at org.neo4j.kernel.impl.api.store.CacheLayer$2.load(CacheLayer.java:103)
-	at org.neo4j.kernel.impl.api.store.CacheLayer$2.load(CacheLayer.java:99)
-	at org.neo4j.kernel.impl.core.Primitive.ensurePropertiesLoaded(Primitive.java:89)
-	at org.neo4j.kernel.impl.core.Primitive.getProperties(Primitive.java:58)
-	at org.neo4j.kernel.impl.api.store.PersistenceCache.nodeGetProperties(PersistenceCache.java:151)
-	at org.neo4j.kernel.impl.api.store.CacheLayer.nodeGetAllProperties(CacheLayer.java:272)
-	at org.neo4j.kernel.impl.api.StateHandlingStatementOperations.nodeGetAllProperties(StateHandlingStatementOperations.java:739)
-	at org.neo4j.kernel.impl.api.StateHandlingStatementOperations.nodeGetProperty(StateHandlingStatementOperations.java:708)
-	at org.neo4j.kernel.impl.api.ConstraintEnforcingEntityOperations.nodeGetProperty(ConstraintEnforcingEntityOperations.java:276)
-	at org.neo4j.kernel.impl.api.OperationsFacade.nodeGetProperty(OperationsFacade.java:166)
-	at org.neo4j.cypher.internal.spi.v2_1.TransactionBoundQueryContext$NodeOperations.getProperty(TransactionBoundQueryContext.scala:146)
-	at org.neo4j.cypher.internal.compiler.v2_1.spi.DelegatingOperations.getProperty(DelegatingQueryContext.scala:116)
-	at org.neo4j.cypher.internal.compiler.v2_1.spi.ExceptionTranslatingQueryContext$ExceptionTranslatingOperations.org$neo4j$cypher$internal$compiler$v2_1$spi$ExceptionTranslatingQueryContext$ExceptionTranslatingOperations$$super$getProperty(ExceptionTranslatingQueryContext.scala:127)
-	at org.neo4j.cypher.internal.compiler.v2_1.spi.ExceptionTranslatingQueryContext$ExceptionTranslatingOperations$$anonfun$getProperty$1.apply(ExceptionTranslatingQueryContext.scala:127)
-	at org.neo4j.cypher.internal.compiler.v2_1.spi.ExceptionTranslatingQueryContext.org$neo4j$cypher$internal$compiler$v2_1$spi$ExceptionTranslatingQueryContext$$translateException(ExceptionTranslatingQueryContext.scala:152)
-	at org.neo4j.cypher.internal.compiler.v2_1.spi.ExceptionTranslatingQueryContext$ExceptionTranslatingOperations.getProperty(ExceptionTranslatingQueryContext.scala:127)
-	at org.neo4j.cypher.internal.compiler.v2_1.spi.DelegatingOperations.getProperty(DelegatingQueryContext.scala:116)
-	at org.neo4j.cypher.internal.compiler.v2_1.helpers.MapSupport$PropertyContainerMap$$anonfun$get$1.apply(MapSupport.scala:57)
-	at org.neo4j.cypher.internal.compiler.v2_1.helpers.MapSupport$PropertyContainerMap$$anonfun$get$1.apply(MapSupport.scala:57)
-	at scala.Option.flatMap(Option.scala:170)
-	at org.neo4j.cypher.internal.compiler.v2_1.helpers.MapSupport$PropertyContainerMap.get(MapSupport.scala:57)
-	at org.neo4j.cypher.internal.compiler.v2_1.helpers.MapSupport$PropertyContainerMap.get(MapSupport.scala:52)
-	at scala.collection.MapLike$class.getOrElse(MapLike.scala:126)
-	at org.neo4j.cypher.internal.compiler.v2_1.helpers.MapSupport$PropertyContainerMap.getOrElse(MapSupport.scala:52)
-	at org.neo4j.cypher.internal.compiler.v2_1.commands.expressions.Property.apply(Property.scala:38)
-	at org.neo4j.cypher.internal.compiler.v2_1.commands.Equals.isMatch(ComparablePredicate.scala:61)
-	at org.neo4j.cypher.internal.compiler.v2_1.commands.And.isMatch(Predicate.scala:101)*/
 public class ProductDatabase {
 
     private GraphDatabaseService graphDb;
-    private final String DB_PATH = "c:/Neo4J";
 
     public void createDB() {
-        this.graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(DB_PATH);
+        this.graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(NEOConstants.DB_PATH);
     }
 
     public void registerShutdownHook() {
@@ -64,12 +28,12 @@ public class ProductDatabase {
             }
         });
 
-        System.out.println("graphDB shut down.");
+        System.out.println(NEOConstants.DB_SHUTDOWN_MESSAGE);
     }
 
     public String query(String query) {
 
-        System.out.println("method query\n" + query);
+        System.out.println(NEOConstants.QUERY_ANNOUNCER + query);
 
         ExecutionEngine engine = new ExecutionEngine(graphDb);
         ExecutionResult result;
@@ -77,49 +41,100 @@ public class ProductDatabase {
         return result.dumpToString();
     }
 
-    public void createProductNodes(Product product) {
+    public void createAlternateProductNodes(Product product) {
 
-        String productNumber = product.getProductNumber();
-        String name = product.getName();
-        String price = product.getPrice();
-        String site = product.getSite();
         List<String> productAttributes = product.getAttributes();
         List<String> productValues = product.getValues();
 
         ExecutionEngine engine = new ExecutionEngine(graphDb);
 
-        String query = "MERGE (p:Product { name : '" + name + "', productnumber: '" + productNumber + "', price : " + price + ", date: '" + getDateTime() + "' })";
-        executeQuery(query, engine);
-
-        query = "MERGE (w:Website { url : '" + site + "' })";
-        executeQuery(query, engine);
-
-        query = "MATCH (p:Product),(w:Website) "
-                + " WHERE p.name = '" + name + "' AND p.price =" + price + " AND w.url = '" + site + "'"
-                + " MERGE (p)-[r:BELONGS_TO]->(w) ";
-
-        executeQuery(query, engine);
+        executeQuery(productMerge(product), engine);
+        executeQuery(websiteMerge(product), engine);
+        executeQuery(productWebsiteRelationship(product), engine);
 
         if (productAttributes.size() == productValues.size()) {
             for (int i = 0; i < productAttributes.size() && i < productValues.size(); i++) {
-                query = "MERGE (a:Attribute { type : '" + productAttributes.get(i) + "', value : '" + productValues.get(i) + "' })";
-                executeQuery(query, engine);
 
-                query = "MATCH (p:Product),(a:Attribute) "
-                        + " WHERE p.name = '" + name + "' AND p.price =" + price + " AND a.type = '" + productAttributes.get(i) + "' AND a.value = '" + productValues.get(i) + "'"
-                        + " MERGE (p)-[r:HAS_PROPERTY]->(a) ";
-                executeQuery(query, engine);
+                executeQuery(productAttributeMerge(productAttributes.get(i), productValues.get(i)), engine);
+                executeQuery(productAttributeRelationship(product, productAttributes.get(i), productValues.get(i)), engine);
+
             }
         }
     }
 
+    private String productMerge(Product product) {
+        // "MERGE (p:Product { name : '" + name + "', productnumber: '" + productNumber + "', price : " + price + ", date: '" + getDateTime() + "' })"
+        StringBuilder query = new StringBuilder();
+        query.append(NEOConstants.PRODUCT_MERGE_QUERY[0]);
+        query.append(product.getName());
+        query.append(NEOConstants.PRODUCT_MERGE_QUERY[1]);
+        query.append(product.getProductNumber());
+        query.append(NEOConstants.PRODUCT_MERGE_QUERY[2]);
+        query.append(product.getPrice());
+        query.append(NEOConstants.PRODUCT_MERGE_QUERY[3]);
+        query.append(getDateTime());
+        query.append(NEOConstants.PRODUCT_MERGE_QUERY[4]);
+        return query.toString();
+    }
+
+    private String websiteMerge(Product product) {
+        // "MERGE (w:Website { url : '" + site + "' })";
+        StringBuilder query = new StringBuilder();
+        query.append(NEOConstants.WEBSITE_MERGE_QUERY[0]);
+        query.append(product.getSite());
+        query.append(NEOConstants.WEBSITE_MERGE_QUERY[1]);
+
+        return query.toString();
+    }
+
+    private String productWebsiteRelationship(Product product) {
+        // "MATCH (p:Product),(w:Website) WHERE p.name = '" + name + "' AND p.price =" + price + " AND w.url = '" + site + "' MERGE (p)-[r:BELONGS_TO]->(w) ";
+        StringBuilder query = new StringBuilder();
+        query.append(NEOConstants.PRODUCT_WEBSITE_RELATIONSHIP_QUERY[0]);
+        query.append(product.getName());
+        query.append(NEOConstants.PRODUCT_WEBSITE_RELATIONSHIP_QUERY[1]);
+        query.append(product.getPrice());
+        query.append(NEOConstants.PRODUCT_WEBSITE_RELATIONSHIP_QUERY[2]);
+        query.append(product.getSite());
+        query.append(NEOConstants.PRODUCT_WEBSITE_RELATIONSHIP_QUERY[3]);
+
+        return query.toString();
+    }
+
+    private String productAttributeMerge(String attribute, String value) {
+        //"MERGE (a:Attribute { type : '" + productAttributes.get(i) + "', value : '" + productValues.get(i) + "' })";
+        StringBuilder query = new StringBuilder();
+        query.append(NEOConstants.PRODUCT_ATTRIBUTE_MERGE_QUERY[0]);
+        query.append(attribute);
+        query.append(NEOConstants.PRODUCT_ATTRIBUTE_MERGE_QUERY[1]);
+        query.append(value);
+        query.append(NEOConstants.PRODUCT_ATTRIBUTE_MERGE_QUERY[2]);
+
+        return query.toString();
+    }
+
+    private String productAttributeRelationship(Product product, String attribute, String value) {
+        //"MATCH (p:Product),(a:Attribute) WHERE p.name = '" + name + "' AND p.price =" + price + " AND a.type = '" + productAttributes.get(i) + "' AND a.value = '" + productValues.get(i) + "' MERGE (p)-[r:HAS_PROPERTY]->(a) ";
+        StringBuilder query = new StringBuilder();
+        query.append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[0]);
+        query.append(product.getName());
+        query.append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[1]);
+        query.append(product.getPrice());
+        query.append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[2]);
+        query.append(attribute);
+        query.append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[3]);
+        query.append(value);
+        query.append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[4]);
+        return query.toString();
+    }
+
     private void executeQuery(String query, ExecutionEngine engine) {
-        System.out.println("method query\n" + query);
+        System.out.println(NEOConstants.QUERY_ANNOUNCER + query);
         engine.execute(query);
     }
 
     private String getDateTime() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat(NEOConstants.DATE_FORMAT);
         Date date = new Date();
         return dateFormat.format(date);
     }

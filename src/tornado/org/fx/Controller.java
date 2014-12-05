@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import tornado.org.cypherspider.AlternateCrawler;
+import tornado.org.fx.constants.FXConstants;
 import tornado.org.neo4j.ProductDatabase;
 
 import java.net.URL;
@@ -32,7 +33,7 @@ public class Controller implements Initializable {
         fetchInfoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                output.setText("");
+                output.setText(FXConstants.EMPTY);
 
                 output.setText(crawl.crawl(input.getText(), DB));
             }
