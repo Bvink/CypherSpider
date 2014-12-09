@@ -42,20 +42,20 @@ public class AlternateCrawler {
     private String createUrl(String productNumber) {
         StringBuilder sb = new StringBuilder();
         sb.append(CSConstants.ALTERNATE_URL)
-        .append(CSConstants.ALTERNATE_PRODUCT_LOCATION)
-        .append(productNumber);
+                .append(CSConstants.ALTERNATE_PRODUCT_LOCATION)
+                .append(productNumber);
         return sb.toString();
     }
 
     private StringBuilder productPropertiesOutput(StringBuilder sb, Product product) {
         sb.append(CSConstants.PRODUCT_OUTPUT_STR)
-        .append(product.getName())
-        .append(CSConstants.LINE_SEPERATOR)
-        .append(CSConstants.PRIJS_OUTPUT_STR)
-        .append(CSConstants.EURO)
-        .append(product.getPrice())
-        .append(CSConstants.LINE_SEPERATOR)
-        .append(combineValues(product.getAttributes(), product.getValues()));
+                .append(product.getName())
+                .append(CSConstants.LINE_SEPERATOR)
+                .append(CSConstants.PRIJS_OUTPUT_STR)
+                .append(CSConstants.EURO)
+                .append(product.getPrice())
+                .append(CSConstants.LINE_SEPERATOR)
+                .append(combineValues(product.getAttributes(), product.getValues()));
 
         return sb;
     }
@@ -88,7 +88,7 @@ public class AlternateCrawler {
         }
         for (String c : combined) {
             sb.append(c)
-            .append(CSConstants.LINE_SEPERATOR);
+                    .append(CSConstants.LINE_SEPERATOR);
         }
 
         return sb;
@@ -108,8 +108,8 @@ public class AlternateCrawler {
     private String getProduct(Document doc) throws Exception {
         StringBuilder sb = new StringBuilder();
         sb.append(getElementText(CSConstants.BRAND_ELEMENT, doc))
-        .append(CSConstants.SPACE)
-        .append(doc.select(CSConstants.META_ELEMENT).get(CSConstants.ALTERNATE_META_INDEX).attr(CSConstants.CONTENT_ELEMENT));
+                .append(CSConstants.SPACE)
+                .append(doc.select(CSConstants.META_ELEMENT).get(CSConstants.ALTERNATE_META_INDEX).attr(CSConstants.CONTENT_ELEMENT));
         return sb.toString();
     }
 

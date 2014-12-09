@@ -66,14 +66,14 @@ public class ProductDatabase {
         // "MERGE (p:Product { name : '" + name + "', productnumber: '" + productNumber + "', price : " + price + ", date: '" + getDateTime() + "' })"
         StringBuilder query = new StringBuilder();
         query.append(NEOConstants.PRODUCT_MERGE_QUERY[0])
-        .append(product.getName())
-        .append(NEOConstants.PRODUCT_MERGE_QUERY[1])
-        .append(product.getProductNumber())
-        .append(NEOConstants.PRODUCT_MERGE_QUERY[2])
-        .append(product.getPrice())
-        .append(NEOConstants.PRODUCT_MERGE_QUERY[3])
-        .append(getDateTime())
-        .append(NEOConstants.PRODUCT_MERGE_QUERY[4]);
+                .append(product.getName())
+                .append(NEOConstants.PRODUCT_MERGE_QUERY[1])
+                .append(product.getProductNumber())
+                .append(NEOConstants.PRODUCT_MERGE_QUERY[2])
+                .append(product.getPrice())
+                .append(NEOConstants.PRODUCT_MERGE_QUERY[3])
+                .append(getDateTime())
+                .append(NEOConstants.PRODUCT_MERGE_QUERY[4]);
         return query.toString();
     }
 
@@ -81,8 +81,8 @@ public class ProductDatabase {
         // "MERGE (w:Website { url : '" + site + "' })";
         StringBuilder query = new StringBuilder();
         query.append(NEOConstants.WEBSITE_MERGE_QUERY[0])
-        .append(product.getSite())
-        .append(NEOConstants.WEBSITE_MERGE_QUERY[1]);
+                .append(product.getSite())
+                .append(NEOConstants.WEBSITE_MERGE_QUERY[1]);
 
         return query.toString();
     }
@@ -91,12 +91,12 @@ public class ProductDatabase {
         // "MATCH (p:Product),(w:Website) WHERE p.name = '" + name + "' AND p.price =" + price + " AND w.url = '" + site + "' MERGE (p)-[r:BELONGS_TO]->(w) ";
         StringBuilder query = new StringBuilder();
         query.append(NEOConstants.PRODUCT_WEBSITE_RELATIONSHIP_QUERY[0])
-        .append(product.getName())
-        .append(NEOConstants.PRODUCT_WEBSITE_RELATIONSHIP_QUERY[1])
-        .append(product.getPrice())
-        .append(NEOConstants.PRODUCT_WEBSITE_RELATIONSHIP_QUERY[2])
-        .append(product.getSite())
-        .append(NEOConstants.PRODUCT_WEBSITE_RELATIONSHIP_QUERY[3]);
+                .append(product.getName())
+                .append(NEOConstants.PRODUCT_WEBSITE_RELATIONSHIP_QUERY[1])
+                .append(product.getPrice())
+                .append(NEOConstants.PRODUCT_WEBSITE_RELATIONSHIP_QUERY[2])
+                .append(product.getSite())
+                .append(NEOConstants.PRODUCT_WEBSITE_RELATIONSHIP_QUERY[3]);
 
         return query.toString();
     }
@@ -105,10 +105,10 @@ public class ProductDatabase {
         //"MERGE (a:Attribute { type : '" + productAttributes.get(i) + "', value : '" + productValues.get(i) + "' })";
         StringBuilder query = new StringBuilder();
         query.append(NEOConstants.PRODUCT_ATTRIBUTE_MERGE_QUERY[0])
-        .append(attribute)
-        .append(NEOConstants.PRODUCT_ATTRIBUTE_MERGE_QUERY[1])
-        .append(value)
-        .append(NEOConstants.PRODUCT_ATTRIBUTE_MERGE_QUERY[2]);
+                .append(attribute)
+                .append(NEOConstants.PRODUCT_ATTRIBUTE_MERGE_QUERY[1])
+                .append(value)
+                .append(NEOConstants.PRODUCT_ATTRIBUTE_MERGE_QUERY[2]);
 
         return query.toString();
     }
@@ -117,19 +117,21 @@ public class ProductDatabase {
         //"MATCH (p:Product),(a:Attribute) WHERE p.name = '" + name + "' AND p.price =" + price + " AND a.type = '" + productAttributes.get(i) + "' AND a.value = '" + productValues.get(i) + "' MERGE (p)-[r:HAS_PROPERTY]->(a) ";
         StringBuilder query = new StringBuilder();
         query.append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[0])
-        .append(product.getName())
-        .append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[1])
-        .append(product.getPrice())
-        .append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[2])
-        .append(attribute)
-        .append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[3])
-        .append(value)
-        .append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[4]);
+                .append(product.getName())
+                .append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[1])
+                .append(product.getPrice())
+                .append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[2])
+                .append(attribute)
+                .append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[3])
+                .append(value)
+                .append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[4]);
         return query.toString();
     }
 
     private void executeQuery(String query, ExecutionEngine engine) {
-        if (NEOConstants.SYSTEM_OUTPUT) { System.out.println(NEOConstants.QUERY_ANNOUNCER + query); }
+        if (NEOConstants.SYSTEM_OUTPUT) {
+            System.out.println(NEOConstants.QUERY_ANNOUNCER + query);
+        }
         engine.execute(query);
     }
 

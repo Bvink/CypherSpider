@@ -31,7 +31,7 @@ public class Product {
         this.price = price;
     }
 
-    public String getPrice () {
+    public String getPrice() {
         return price;
     }
 
