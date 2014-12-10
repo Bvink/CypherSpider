@@ -1,4 +1,5 @@
 package tornado.org;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -7,7 +8,6 @@ import org.jsoup.select.Elements;
 
 import tornado.org.cypherspider.AlternateCrawler;
 import tornado.org.neo4j.ProductDatabase;
-
 import tornado.org.cypherspider.AlternateCrawler;
 import tornado.org.neo4j.ProductDatabase;
 
@@ -28,13 +28,20 @@ public class FindLinksOnAlternate extends Thread {
 
 	private static org.jsoup.nodes.Document doc;
 	private static Elements e;
-	private final ProductDatabase productDatabase = new ProductDatabase();
+	private static final ProductDatabase productDatabase = new ProductDatabase();
 
-	private final AlternateCrawler alternateCrawler = new AlternateCrawler();
+	private static final AlternateCrawler alternateCrawler = new AlternateCrawler();
+	private static final String urlBase = "http://www.alternate.nl";
+	private static final int offsetPaternProductLink = 14;
 
 	private static String url = "http://www.alternate.nl/html/highlights/page.html?hgid=205&tgid=944&tk=7&lk=9276";
 
-	private static int sizeProductNr = 7;
+	private static final int sizeProductNr = 7;
+	private static final String productLinkXmlClassTag = "productLink";
+	private static final String navXmlIdTag = "navTree";
+	private static final String hyperlinkXmltag = "a";
+	private static final String hyperlinkAttributetag = "href";
+	
 
 	/*
 	 * Maakt contact met alternate en begint vervolgens de graph database te
@@ -48,7 +55,7 @@ public class FindLinksOnAlternate extends Thread {
 
 		try {
 			doc = Jsoup.connect(url).get();
-			e = doc.getElementById("navTree").getElementsByTag("a");
+			e = doc.getElementById(navXmlIdTag).getElementsByTag(hyperlinkXmltag);
 			parselinks(e);
 
 		} catch (IOException e1) {
@@ -61,7 +68,7 @@ public class FindLinksOnAlternate extends Thread {
 
 			try {
 				doc = Jsoup.connect(url).get();
-				e = doc.getElementById("navTree").getElementsByTag("a");
+				e = doc.getElementById(navXmlIdTag).getElementsByTag(hyperlinkXmltag);
 				parselinks(e);
 
 			} catch (Exception exp) {
@@ -82,12 +89,10 @@ public class FindLinksOnAlternate extends Thread {
 
 			try {
 				String producturl = productlinks.get(i);
-				int startpoint = producturl.indexOf(paternProductLink) + 14;
+				int startpoint = producturl.indexOf(paternProductLink) + offsetPaternProductLink;
 				String nr = producturl.substring(startpoint, startpoint
 						+ sizeProductNr);
-				nr = nr.replace("?", "");
-				nr = nr.replace("t", "");
-
+				cleanProductnr(nr);
 				productnr.add(nr);
 				// TODO controlleer wrm hij naa een lange periode een
 				// java.systeem.outofmemory error geeft
@@ -100,6 +105,12 @@ public class FindLinksOnAlternate extends Thread {
 
 	}
 
+	private void cleanProductnr(String productNr) {
+		productNr = productNr.replace("?", "");
+		productNr = productNr.replace("t", "");
+
+	}
+
 	private void findProducts() {
 		for (int i = 0; i < links.size(); i++) {
 
@@ -108,15 +119,15 @@ public class FindLinksOnAlternate extends Thread {
 			if (listinglink.contains(paternListinLink)) {
 
 				listinglink = listinglink + productListingUrlModifier;
-				url = "http://www.alternate.nl" + listinglink;
+				url = urlBase + listinglink;
 
 				try {
 					doc = Jsoup.connect(url).get();
-					e = doc.getElementsByClass("productLink");
+					e = doc.getElementsByClass(productLinkXmlClassTag);
 
 					for (int j = 0; j < e.size(); j++) {
-						String plink = e.get(j).getElementsByTag("a")
-								.attr("href");
+						String plink = e.get(j).getElementsByTag(hyperlinkXmltag)
+								.attr(hyperlinkAttributetag);
 						productlinks.add(plink);
 
 					}
@@ -133,7 +144,7 @@ public class FindLinksOnAlternate extends Thread {
 	private void parselinks(Elements elements) {
 		for (int i = 0; i < elements.size(); i++) {
 
-			String link = elements.get(i).attr("href");
+			String link = elements.get(i).attr(hyperlinkAttributetag);
 
 			if (link.contains(paternNavigationLink)
 					|| link.contains(paternProductLink)) {

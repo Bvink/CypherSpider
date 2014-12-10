@@ -33,7 +33,12 @@ public class FindLinksOnMycom extends Thread {
 
 	private static String url = "http://www.mycom.nl/componenten";
 
-	private static int sizeProductNr = 7;
+	private static final int sizeProductNr = 7;
+	private static final String hyperlinkXmltag = "a";
+	private static final String hyperlinkAttributetag = "href";
+	private static final String navXmlIdTag = "main_content";
+	private static final String productLinkXmlClassTag = "product_image";
+
 
 	public void Run() {
 
@@ -42,7 +47,7 @@ public class FindLinksOnMycom extends Thread {
 			doc = Jsoup.connect(url).get();
 			System.out.println(doc.toString());
 			
-			e = doc.getElementById("main_content").getElementsByTag("a"); //.getElementsByClass("primary_list bordered_list productcategory_list devider bg_light_gradient");
+			e = doc.getElementById(navXmlIdTag).getElementsByTag(hyperlinkXmltag); //.getElementsByClass("primary_list bordered_list productcategory_list devider bg_light_gradient");
 			System.out.println(doc.toString());
 			
 			int numberFound = e.size();
@@ -103,11 +108,11 @@ public class FindLinksOnMycom extends Thread {
 
 				try {
 					doc = Jsoup.connect(url).get();
-					e = doc.getElementsByClass("product_image");
+					e = doc.getElementsByClass(productLinkXmlClassTag);
 
 					for (int j = 0; j < e.size(); j++) {
-						String plink = e.get(j).getElementsByTag("a")
-								.attr("href");
+						String plink = e.get(j).getElementsByTag(hyperlinkXmltag)
+								.attr(hyperlinkAttributetag);
 						productlinks.add(plink);
 
 					}
@@ -126,7 +131,7 @@ public class FindLinksOnMycom extends Thread {
 	private void parselinks(Elements elements) {
 		for (int i = 0; i < elements.size(); i++) {
 
-			String link = elements.get(i).attr("href");
+			String link = elements.get(i).attr(hyperlinkAttributetag);
 			System.out.println(link);
 
 			if (link.contains(paternNavigationLink)
