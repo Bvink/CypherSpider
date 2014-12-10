@@ -40,7 +40,7 @@ public class FindLinksOnMycom extends Thread {
 	private static final String productLinkXmlClassTag = "product_image";
 
 
-	public void Run() {
+	public void run() {
 
 		
 		try {

@@ -13,11 +13,14 @@ import java.util.Date;
 import java.util.List;
 
 public class ProductDatabase {
+	// TODO hiervan mag er maar een van zijn anders blokkeert het de database en kan je maar een thread starten.
+    private static GraphDatabaseService graphDb;
+    ExecutionEngine engine;
 
-    private GraphDatabaseService graphDb;
 
     public void createDB() {
         this.graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(NEOConstants.DB_PATH);
+        engine = new ExecutionEngine(graphDb);
     }
 
     public void registerShutdownHook() {
@@ -28,14 +31,14 @@ public class ProductDatabase {
             }
         });
 
-        System.out.println(NEOConstants.DB_SHUTDOWN_MESSAGE);
+        //System.out.println(NEOConstants.DB_SHUTDOWN_MESSAGE);
     }
 
     public String query(String query) {
 
         System.out.println(NEOConstants.QUERY_ANNOUNCER + query);
 
-        ExecutionEngine engine = new ExecutionEngine(graphDb);
+        //ExecutionEngine engine = new ExecutionEngine(graphDb);
         ExecutionResult result;
         result = engine.execute(query);
         return result.dumpToString();
@@ -45,8 +48,8 @@ public class ProductDatabase {
 
         List<String> productAttributes = product.getAttributes();
         List<String> productValues = product.getValues();
-
-        ExecutionEngine engine = new ExecutionEngine(graphDb);
+        //TODO ExecutionEngine wordt te vaak aangemaakt, zorgt voor Crash, zie of het niet een globale variable kan worden 
+       // ExecutionEngine engine = new ExecutionEngine(graphDb);
 
         executeQuery(productMerge(product), engine);
         executeQuery(websiteMerge(product), engine);
@@ -130,7 +133,7 @@ public class ProductDatabase {
 
     private void executeQuery(String query, ExecutionEngine engine) {
         if (NEOConstants.SYSTEM_OUTPUT) {
-            System.out.println(NEOConstants.QUERY_ANNOUNCER + query);
+           // System.out.println(NEOConstants.QUERY_ANNOUNCER + query);
         }
         engine.execute(query);
     }

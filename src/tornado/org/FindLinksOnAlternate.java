@@ -79,6 +79,8 @@ public class FindLinksOnAlternate extends Thread {
 
 		findProducts();
 		insertProducts();
+		
+		productDatabase.registerShutdownHook(); 
 
 	}
 
@@ -92,7 +94,7 @@ public class FindLinksOnAlternate extends Thread {
 				int startpoint = producturl.indexOf(paternProductLink) + offsetPaternProductLink;
 				String nr = producturl.substring(startpoint, startpoint
 						+ sizeProductNr);
-				cleanProductnr(nr);
+				nr = cleanProductnr(nr);
 				productnr.add(nr);
 				// TODO controlleer wrm hij naa een lange periode een
 				// java.systeem.outofmemory error geeft
@@ -105,10 +107,10 @@ public class FindLinksOnAlternate extends Thread {
 
 	}
 
-	private void cleanProductnr(String productNr) {
+	private String cleanProductnr(String productNr) {
 		productNr = productNr.replace("?", "");
 		productNr = productNr.replace("t", "");
-
+		return productNr ; 
 	}
 
 	private void findProducts() {
