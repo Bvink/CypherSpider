@@ -45,12 +45,9 @@ public class FindLinksOnMycom extends Thread {
 		
 		try {
 			doc = Jsoup.connect(url).get();
-			System.out.println(doc.toString());
 			
 			e = doc.getElementById(navXmlIdTag).getElementsByTag(hyperlinkXmltag); //.getElementsByClass("primary_list bordered_list productcategory_list devider bg_light_gradient");
-			System.out.println(doc.toString());
 			
-			int numberFound = e.size();
 			//e = e.get(numberFound-1).getElementsByTag("a");
 			
 			parselinks(e);

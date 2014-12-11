@@ -15,7 +15,7 @@ import java.util.List;
 public class ProductDatabase {
 	// TODO hiervan mag er maar een van zijn anders blokkeert het de database en kan je maar een thread starten.
     private static GraphDatabaseService graphDb;
-    ExecutionEngine engine;
+    private static ExecutionEngine engine;
 
 
     public void createDB() {
@@ -31,7 +31,7 @@ public class ProductDatabase {
             }
         });
 
-        //System.out.println(NEOConstants.DB_SHUTDOWN_MESSAGE);
+        System.out.println(NEOConstants.DB_SHUTDOWN_MESSAGE);
     }
 
     public String query(String query) {
