@@ -23,6 +23,8 @@ public class AlternateCrawler {
         try {
             Document doc = Jsoup.connect(url).get();
 
+            sb = includeInfo(sb, productNumber);
+
             Product product = new Product();
             product.setSite(CSConstants.ALTERNATE_URL);
             product.setName(getProduct(doc));
@@ -58,6 +60,16 @@ public class AlternateCrawler {
                 .append(CSConstants.LINE_SEPERATOR)
                 .append(combineValues(product.getAttributes(), product.getValues()));
 
+        return sb;
+    }
+
+    private StringBuilder includeInfo(StringBuilder sb, String productNumber) {
+        sb.append(CSConstants.WEBSITE_STR)
+                .append(CSConstants.PARADIGIT_URL)
+                .append(CSConstants.LINE_SEPERATOR)
+                .append(CSConstants.PRODUCT_NUMBER_STR)
+                .append(productNumber)
+                .append(CSConstants.LINE_SEPERATOR);
         return sb;
     }
 

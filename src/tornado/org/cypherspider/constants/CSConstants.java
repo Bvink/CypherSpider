@@ -11,6 +11,8 @@ public class CSConstants {
 
     public static final String PRODUCT_OUTPUT_STR = "Product: ";
     public static final String PRIJS_OUTPUT_STR = "Prijs: ";
+    public static final String WEBSITE_STR = "Website: ";
+    public static final String PRODUCT_NUMBER_STR = "Product nummer: ";
 
     public static final String COLUMN_ONE = "techDataCol1";
     public static final String COLUMN_TWO = "techDataCol2";

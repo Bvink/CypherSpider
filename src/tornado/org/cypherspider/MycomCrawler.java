@@ -26,9 +26,13 @@ public class MycomCrawler {
 		try {
 			Document doc = Jsoup.connect(url).get();
 
+            String productNumber = getProductNumber(doc);
+
+            sb = includeInfo(sb, productNumber);
+
 			product.setSite(CSConstants.MYCOM_URL);
 			product.setName(getProductName(doc));
-			product.setID(getProductId(doc));
+			product.setID(productNumber);
 			product.setPrice(getPrice(doc).replace(CSConstants.DASH,
 					CSConstants.DOUBLE_ZERO));
 
@@ -43,7 +47,7 @@ public class MycomCrawler {
 		return sb.toString();
 	}
 
-	private String getProductId(Document doc) {
+	private String getProductNumber(Document doc) {
 
 		Elements es = doc
 				.getElementsByClass(CSConstants.DETAILS_DEVIDER);
@@ -66,6 +70,16 @@ public class MycomCrawler {
 
 		return sb;
 	}
+
+    private StringBuilder includeInfo(StringBuilder sb, String productNumber) {
+        sb.append(CSConstants.WEBSITE_STR)
+                .append(CSConstants.MYCOM_URL)
+                .append(CSConstants.LINE_SEPERATOR)
+                .append(CSConstants.PRODUCT_NUMBER_STR)
+                .append(productNumber)
+                .append(CSConstants.LINE_SEPERATOR);
+        return sb;
+    }
 
 	private void getProductAttributes(Document doc) {
 

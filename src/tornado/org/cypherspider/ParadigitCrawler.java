@@ -23,9 +23,13 @@ public class ParadigitCrawler {
         try {
             Document doc = Jsoup.connect(url).get();
 
+            String productNumber = getProductNumber(doc);
+
+            sb = includeInfo(sb, productNumber);
+
             product.setSite(CSConstants.PARADIGIT_URL);
             product.setName(getProduct(doc));
-            product.setID(getProductNumber(doc));
+            product.setID(productNumber);
             product.setPrice(getPrice(doc).replace(CSConstants.DASH, CSConstants.DOUBLE_ZERO));
            getProductAttributes(doc);
 
@@ -43,7 +47,7 @@ public class ParadigitCrawler {
 		Elements es = doc
 				.getElementsByClass(CSConstants.ITEMDETAIL_SUMMARY_CLASS);
 
-		productNumber = es.get(es.size() - 1).getElementsByTag(CSConstants.SPAN).get(0)
+		productNumber = es.get(es.size() - 1).getElementsByTag(CSConstants.SPAN).get(1)
 				.text();
 
 		return productNumber;
@@ -63,6 +67,16 @@ public class ParadigitCrawler {
 
 		return sb;
 	}
+
+    private StringBuilder includeInfo(StringBuilder sb, String productNumber) {
+        sb.append(CSConstants.WEBSITE_STR)
+                .append(CSConstants.PARADIGIT_URL)
+                .append(CSConstants.LINE_SEPERATOR)
+                .append(CSConstants.PRODUCT_NUMBER_STR)
+                .append(productNumber)
+                .append(CSConstants.LINE_SEPERATOR);
+        return sb;
+    }
 
 	private void getProductAttributes(Document doc) {
 		List<String> productAttributes = new ArrayList<>();
