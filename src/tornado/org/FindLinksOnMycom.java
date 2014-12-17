@@ -27,7 +27,7 @@ public class FindLinksOnMycom extends Thread {
 
 	private static org.jsoup.nodes.Document doc;
 	private Elements e;
-	private final ProductDatabase productDatabase = new ProductDatabase();
+	private static final ProductDatabase productDatabase = new ProductDatabase();
 	
 	//TODO maak nieuwe Crawler voor Mycom 
 	//private final AlternateCrawler alternateCrawler = new AlternateCrawler();

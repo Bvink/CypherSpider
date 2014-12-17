@@ -27,7 +27,7 @@ public class FindLinksOnParadigit extends Thread {
 	private Elements e;
 
 	// TODO moet altijd dezelfde object blijven in de hele applicatie
-	private final ProductDatabase productDatabase = new ProductDatabase();
+	private static final ProductDatabase productDatabase = new ProductDatabase();
 
 	private static final ParadigitCrawler PARADIGIT_CRAWLER = new ParadigitCrawler() ; 
 

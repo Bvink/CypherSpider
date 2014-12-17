@@ -19,16 +19,14 @@ public class MycomCrawler {
 
 	Product product = new Product();
 
-	public String crawl(String productNumber, ProductDatabase db) {
-
-		String url = createUrl(productNumber);
+	public String crawl(String url, ProductDatabase db) {
 
 		StringBuilder sb = new StringBuilder();
 
 		try {
 			Document doc = Jsoup.connect(url).get();
 
-			product.setSite("www.mycom.nl");
+			product.setSite(CSConstants.MYCOM_URL);
 			product.setName(getProductName(doc));
 			product.setID(getProductId(doc));
 			product.setPrice(getPrice(doc).replace(CSConstants.DASH,
@@ -48,18 +46,10 @@ public class MycomCrawler {
 	private String getProductId(Document doc) {
 
 		Elements es = doc
-				.getElementsByClass("product_details devider bg_light_gradient content_wrapper");
-		es = es.get(0).getElementsByTag("input");
+				.getElementsByClass(CSConstants.DETAILS_DEVIDER);
+		es = es.get(0).getElementsByTag(CSConstants.INPUT_ELEMENT);
 
-		return es.get(0).attr("value");
-	}
-
-	private String createUrl(String productNumber) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(CSConstants.ALTERNATE_URL)
-				.append(CSConstants.ALTERNATE_PRODUCT_LOCATION)
-				.append(productNumber);
-		return sb.toString();
+		return es.get(0).attr(CSConstants.VALUE_ELEMENT);
 	}
 
 	private StringBuilder productPropertiesOutput(StringBuilder sb,
@@ -79,10 +69,10 @@ public class MycomCrawler {
 
 	private void getProductAttributes(Document doc) {
 
-		Elements es = doc.getElementById("specification").getElementsByClass(
-                "product_specification fullwidth");
+		Elements es = doc.getElementById(CSConstants.SPECIFICATION_ELEMENT).getElementsByClass(
+                CSConstants.SPEFICIATION_CLASS);
 		for (Element e : es) {
-			Elements data = e.getElementsByTag("td");
+			Elements data = e.getElementsByTag(CSConstants.TD);
 			productSpecs.add(data.get(data.size() - 2).text());
 			productValues.add(data.get(data.size() - 1).text());
 		}
@@ -95,7 +85,7 @@ public class MycomCrawler {
 		if (productAttributes.size() == productValues.size()) {
 			for (int i = 0; i < productAttributes.size()
 					&& i < productValues.size(); i++) {
-				combined.add(productAttributes.get(i) + " "
+				combined.add(productAttributes.get(i) + CSConstants.SPACE
 						+ productValues.get(i));
 			}
 		}
@@ -108,10 +98,10 @@ public class MycomCrawler {
 
 	private String getProductName(Document doc) throws Exception {
 
-		Elements es = doc.getElementsByClass("page_header clearfix fullwidth");
-		es = es.get(0).getElementsByTag("a");
+		Elements es = doc.getElementsByClass(CSConstants.PAGE_HEADER);
+		es = es.get(0).getElementsByTag(CSConstants.A);
 		String title = es.get(0).text();
-		title = title.replace(" - MyCom", "");
+		title = title.replace(CSConstants.MYCOM_REPLACEMENT_STRING, CSConstants.EMPTY);
 
 		return title;
 
@@ -119,8 +109,8 @@ public class MycomCrawler {
 
 	private String getPrice(Document doc) throws Exception {
 
-		Elements es = doc.getElementsByClass("product_price");
-		es = es.get(0).getElementsByTag("span");
+		Elements es = doc.getElementsByClass(CSConstants.PRODUCT_PRICE_ELEMENT);
+		es = es.get(0).getElementsByTag(CSConstants.SPAN);
 
 		return es.get(0).text();
 	}

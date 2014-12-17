@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import tornado.org.cypherspider.AlternateCrawler;
+import tornado.org.cypherspider.MycomCrawler;
+import tornado.org.cypherspider.ParadigitCrawler;
 import tornado.org.fx.constants.FXConstants;
 import tornado.org.neo4j.ProductDatabase;
 
@@ -17,7 +19,9 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
-    @FXML private Button fetchInfoButton;
+    @FXML private Button fetchAlternateInfoButton;
+    @FXML private Button fetchMycomInfoButton;
+    @FXML private Button fetchParadigitInfoButton;
     @FXML private Button queryButton;
     @FXML private TextField input;
     @FXML private TextArea output;
@@ -28,14 +32,34 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         DB.createDB();
-        final AlternateCrawler crawl = new AlternateCrawler();
+        final AlternateCrawler alternateCrawler = new AlternateCrawler();
+        final MycomCrawler mycomCrawler = new MycomCrawler();
+        final ParadigitCrawler paradigitCrawler = new ParadigitCrawler();
 
-        fetchInfoButton.setOnAction(new EventHandler<ActionEvent>() {
+        fetchAlternateInfoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 output.setText(FXConstants.EMPTY);
 
-                output.setText(crawl.crawl(input.getText(), DB));
+                output.setText(alternateCrawler.crawl(input.getText(), DB));
+            }
+        });
+
+        fetchMycomInfoButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                output.setText(FXConstants.EMPTY);
+
+                output.setText(mycomCrawler.crawl(input.getText(), DB));
+            }
+        });
+
+        fetchParadigitInfoButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                output.setText(FXConstants.EMPTY);
+
+                output.setText(paradigitCrawler.crawl(input.getText(), DB));
             }
         });
 

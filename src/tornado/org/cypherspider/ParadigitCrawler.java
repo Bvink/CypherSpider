@@ -24,7 +24,7 @@ public class ParadigitCrawler {
         try {
             Document doc = Jsoup.connect(url).get();
 
-            product.setSite("www.paradigit.nl");
+            product.setSite(CSConstants.PARADIGIT_URL);
             product.setName(getProduct(doc));
             product.setID(getProductNumber(doc));
             product.setPrice(getPrice(doc).replace(CSConstants.DASH, CSConstants.DOUBLE_ZERO));
@@ -42,9 +42,9 @@ public class ParadigitCrawler {
 	private String getProductNumber(Document doc) {
 		String productNumber;
 		Elements es = doc
-				.getElementsByClass("itemdetail-summarytab-productnumbercontainer");
+				.getElementsByClass(CSConstants.ITEMDETAIL_SUMMARY_CLASS);
 
-		productNumber = es.get(es.size() - 1).getElementsByTag("span").get(0)
+		productNumber = es.get(es.size() - 1).getElementsByTag(CSConstants.SPAN).get(0)
 				.text();
 
 		return productNumber;
@@ -70,12 +70,12 @@ public class ParadigitCrawler {
 		List<String> productValues = new ArrayList<>();
 
 		Elements es = doc
-				.getElementsByClass("itemdetail-specificationstab-productfeaturecontainer");
+				.getElementsByClass(CSConstants.ITEMDETAIL_SPECIFICATION_CLASS);
 
 		for (Element element : es) {
-			productAttributes.add(element.getElementsByTag("span").get(0)
+			productAttributes.add(element.getElementsByTag(CSConstants.SPAN).get(0)
 					.text());
-			productValues.add(element.getElementsByTag("span").get(1).text());
+			productValues.add(element.getElementsByTag(CSConstants.SPAN).get(1).text());
 		}
 
 		product.setAttributes(productAttributes);
@@ -91,7 +91,7 @@ public class ParadigitCrawler {
 		if (productAttributes.size() == productValues.size()) {
 			for (int i = 0; i < productAttributes.size()
 					&& i < productValues.size(); i++) {
-				combined.add(productAttributes.get(i) + " "
+				combined.add(productAttributes.get(i) + CSConstants.SPACE
 						+ productValues.get(i));
 			}
 		}
@@ -104,15 +104,15 @@ public class ParadigitCrawler {
 
 	private String getProduct(Document doc) throws Exception {
 
-		Elements e = doc.getElementsByClass("itemdetail-producttitlecontainer");
-		return e.get(0).getElementsByTag("span").text();
+		Elements e = doc.getElementsByClass(CSConstants.PRODUCT_TITLE_CONTAINER);
+		return e.get(0).getElementsByTag(CSConstants.SPAN).text();
 
 	}
 
 	private String getPrice(Document doc) throws Exception {
 		
-		Element e = doc.getElementById("ctl00_ContentPlaceHolder1_itemDetail_salespriceIncludingVATPriceLabel_pricePlaceHolder");
-		Elements es = e.getElementsByAttributeValue("itemprop", "price");
-		return es.get(0).attr("content");
+		Element e = doc.getElementById(CSConstants.PRICE_PLACEHOLDER);
+		Elements es = e.getElementsByAttributeValue(CSConstants.ITEMPROP_ELEMENT, CSConstants.PRICE_ELEMENT);
+		return es.get(0).attr(CSConstants.CONTENT_ELEMENT);
 	}
 }
