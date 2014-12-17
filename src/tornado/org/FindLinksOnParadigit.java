@@ -16,6 +16,7 @@ import tornado.org.cypherspider.ParadigitCrawler;
 import tornado.org.neo4j.ProductDatabase;
 
 import org.jsoup.Jsoup;
+import tornado.org.settings.Settings;
 
 public class FindLinksOnParadigit extends Thread {
 
@@ -109,9 +110,11 @@ public class FindLinksOnParadigit extends Thread {
 		insertProducts();
 
 		System.out.println(productlinks.size());
-		productDatabase.registerShutdownHook();
+        Settings.setParadigitEndstate(true);
 
-	}
+        if (Settings.getEndstate()) { productDatabase.registerShutdownHook(); }
+
+    }
 
 	private void insertProducts() {
 		productDatabase.createDB();

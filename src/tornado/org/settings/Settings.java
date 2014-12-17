@@ -30,4 +30,8 @@ public class Settings {
         return paradigitEndstate;
     }
 
+    public static boolean getEndstate() {
+        return alternateEndstate && mycomEndstate && paradigitEndstate;
+    }
+
 }

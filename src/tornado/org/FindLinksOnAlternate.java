@@ -10,6 +10,7 @@ import tornado.org.cypherspider.AlternateCrawler;
 import tornado.org.neo4j.ProductDatabase;
 import tornado.org.cypherspider.AlternateCrawler;
 import tornado.org.neo4j.ProductDatabase;
+import tornado.org.settings.Settings;
 
 /*
  * can ik weer committen
@@ -79,8 +80,10 @@ public class FindLinksOnAlternate extends Thread {
 
 		findProducts();
 		insertProducts();
-		
-		productDatabase.registerShutdownHook(); 
+
+        Settings.setAlternateEndstate(true);
+
+		if (Settings.getEndstate()) { productDatabase.registerShutdownHook(); }
 
 	}
 

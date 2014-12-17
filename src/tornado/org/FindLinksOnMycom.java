@@ -13,6 +13,7 @@ import org.mozilla.javascript.NativeArray;
 import tornado.org.cypherspider.AlternateCrawler;
 import tornado.org.cypherspider.MycomCrawler;
 import tornado.org.neo4j.ProductDatabase;
+import tornado.org.settings.Settings;
 
 public class FindLinksOnMycom extends Thread {
 	// private final CharSequence paternListinLink = "/html/product/listing";
@@ -92,9 +93,11 @@ public class FindLinksOnMycom extends Thread {
 		insertProducts();
 
 		System.out.println(productlinks.size());
-		productDatabase.registerShutdownHook();
+        Settings.setMycomEndstate(true);
 
-	}
+        if (Settings.getEndstate()) { productDatabase.registerShutdownHook(); }
+
+    }
 
 	private void insertProducts() {
 		productDatabase.createDB();
