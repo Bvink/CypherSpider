@@ -11,6 +11,7 @@ import org.jsoup.select.Elements;
 import org.mozilla.javascript.NativeArray;
 
 import tornado.org.cypherspider.AlternateCrawler;
+import tornado.org.cypherspider.MycomCrawler;
 import tornado.org.neo4j.ProductDatabase;
 
 public class FindLinksOnMycom extends Thread {
@@ -27,10 +28,11 @@ public class FindLinksOnMycom extends Thread {
 	private static org.jsoup.nodes.Document doc;
 	private Elements e;
 	private final ProductDatabase productDatabase = new ProductDatabase();
-
+	
 	//TODO maak nieuwe Crawler voor Mycom 
 	//private final AlternateCrawler alternateCrawler = new AlternateCrawler();
-
+	MycomCrawler mycomCrawler= new MycomCrawler() ; 
+	
 	private static String url = "http://www.mycom.nl/componenten";
 
 	private static final int sizeProductNr = 7;
@@ -87,10 +89,20 @@ public class FindLinksOnMycom extends Thread {
 		}
 		*/
 		
-		
-		
-		
-		
+		insertProducts();
+
+		System.out.println(productlinks.size());
+		productDatabase.registerShutdownHook();
+
+	}
+
+	private void insertProducts() {
+		productDatabase.createDB();
+		url = urlMycom ; 
+		for (int i = 0; i < productlinks.size(); i++) {
+			mycomCrawler.crawl(url+productlinks.get(i), productDatabase);
+		}
+
 	}
 	
 	
