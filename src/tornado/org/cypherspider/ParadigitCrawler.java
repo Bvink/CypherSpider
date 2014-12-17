@@ -102,7 +102,7 @@ public class ParadigitCrawler {
 			if(data.size()>1){
 				productValues.add(data.get(1).text().replace(CSConstants.DASH, CSConstants.SPACE));	
 			}else{
-				productValues.add("");	
+				productValues.add(CSConstants.EMPTY);	
 			}
 			
 		

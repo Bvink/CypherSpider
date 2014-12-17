@@ -14,12 +14,12 @@ import java.util.List;
 
 public class ProductDatabase {
 	// TODO hiervan mag er maar een van zijn anders blokkeert het de database en kan je maar een thread starten.
-    private static GraphDatabaseService graphDb;
+    private static GraphDatabaseService graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(NEOConstants.DB_PATH);
     private static ExecutionEngine engine;
 
 
     public void createDB() {
-        this.graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(NEOConstants.DB_PATH);
+     //   this.graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(NEOConstants.DB_PATH);
         engine = new ExecutionEngine(graphDb);
     }
 
