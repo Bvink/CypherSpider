@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78737ecc-f058-47c0-a82d-60a84f6fa9a8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tornado/org/settings/Settings.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="2a385ba9-d441-445c-bb96-d5aaf3aa2e39" name="Failed commit: Default" comment="CypherSpider readme edit" />
@@ -115,7 +114,7 @@
         <entry file="file://$PROJECT_DIR$/src/tornado/org/settings/Settings.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.8611111" vertical-offset="0" max-vertical-offset="663">
-              <caret line="31" column="12" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding>
                 <element signature="e#274#275#0" expanded="true" />
                 <element signature="e#315#316#0" expanded="true" />
@@ -813,7 +812,11 @@
       <created>1418823887305</created>
       <updated>1418823887305</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="CypherSpider&#10;- Added endstate Settings">
+      <created>1418824510845</created>
+      <updated>1418824510845</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -891,7 +894,8 @@
     <MESSAGE value="CypherSpider&#10;- Removed redundant methods pagecrawlers" />
     <MESSAGE value="CypherSpider&#10;- Fixes some errors" />
     <MESSAGE value="CypherSpider&#10;- String Literals to Static Finals" />
-    <option name="LAST_COMMIT_MESSAGE" value="CypherSpider&#10;- String Literals to Static Finals" />
+    <MESSAGE value="CypherSpider&#10;- Added endstate Settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="CypherSpider&#10;- Added endstate Settings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1288,7 +1292,7 @@
     <entry file="file://$PROJECT_DIR$/src/tornado/org/settings/Settings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8611111" vertical-offset="0" max-vertical-offset="663">
-          <caret line="31" column="12" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
             <element signature="e#274#275#0" expanded="true" />
             <element signature="e#315#316#0" expanded="true" />
