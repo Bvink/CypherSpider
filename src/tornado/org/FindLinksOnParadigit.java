@@ -12,6 +12,7 @@ import org.jsoup.select.Elements;
 import org.mozilla.javascript.NativeArray;
 
 import tornado.org.cypherspider.AlternateCrawler;
+import tornado.org.cypherspider.ParadigitCrawler;
 import tornado.org.neo4j.ProductDatabase;
 
 import org.jsoup.Jsoup;
@@ -27,6 +28,8 @@ public class FindLinksOnParadigit extends Thread {
 
 	// TODO moet altijd dezelfde object blijven in de hele applicatie
 	private final ProductDatabase productDatabase = new ProductDatabase();
+
+	private static final ParadigitCrawler PARADIGIT_CRAWLER = new ParadigitCrawler() ; 
 
 	// TODO maak nieuwe Crawler voor Mycom
 	// private final AlternateCrawler alternateCrawler = new AlternateCrawler();
@@ -73,7 +76,7 @@ public class FindLinksOnParadigit extends Thread {
 		try {
 			for (int i = 0; i < Navlinks.size(); i++) {
 				doc = Jsoup.connect(url + Navlinks.get(i)).get();
-				System.out.println(doc.toString());
+				//System.out.println(doc.toString());
 
 				e = doc.getElementsByClass(navXmlClassTag);
 				if (e.size() > 0) {
@@ -103,9 +106,19 @@ public class FindLinksOnParadigit extends Thread {
 			e1.printStackTrace();
 		}
 
-		// findProducts();
+		insertProducts();
 
-		System.out.println(productlinks.toString());
+		System.out.println(productlinks.size());
+		productDatabase.registerShutdownHook();
+
+	}
+
+	private void insertProducts() {
+		productDatabase.createDB();
+
+		for (int i = 0; i < productlinks.size(); i++) {
+			PARADIGIT_CRAWLER.crawl(url+productlinks.get(i), productDatabase);
+		}
 
 	}
 
