@@ -18,11 +18,17 @@ public class ParadigitCrawler {
 
 	public String crawl(String url, ProductDatabase db) {
 
-        StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 
-        try {
-            Document doc = Jsoup.connect(url).get();
+		try {
+			Document doc = Jsoup.connect(url).get();
 
+			product.setSite(CSConstants.PARADIGIT_URL);
+			product.setName(getProduct(doc));
+			product.setID(getProductNumber(doc));
+			product.setPrice(getPrice(doc).replace(CSConstants.DASH,
+					CSConstants.DOUBLE_ZERO));
+			getProductAttributes(doc);
             String productNumber = getProductNumber(doc);
 
             sb = includeInfo(sb, productNumber);
@@ -33,20 +39,23 @@ public class ParadigitCrawler {
             product.setPrice(getPrice(doc).replace(CSConstants.DASH, CSConstants.DOUBLE_ZERO));
            getProductAttributes(doc);
 
-            db.createAlternateProductNodes(product);
-            sb = productPropertiesOutput(sb, product);
-        } catch (Exception e) {
-            sb.append(CSConstants.RETRIEVE_ERROR);
-        }
+			db.createAlternateProductNodes(product);
+			sb = productPropertiesOutput(sb, product);
+		} catch (Exception e) {
+			sb.append(CSConstants.RETRIEVE_ERROR);
+			e.printStackTrace();
+		}
 
-        return sb.toString();
-    }
+		return sb.toString();
+	}
 
 	private String getProductNumber(Document doc) {
 		String productNumber;
 		Elements es = doc
 				.getElementsByClass(CSConstants.ITEMDETAIL_SUMMARY_CLASS);
 
+		productNumber = es.get(es.size() - 1)
+				.getElementsByTag(CSConstants.SPAN).get(0).text();
 		productNumber = es.get(es.size() - 1).getElementsByTag(CSConstants.SPAN).get(1)
 				.text();
 
@@ -86,9 +95,17 @@ public class ParadigitCrawler {
 				.getElementsByClass(CSConstants.ITEMDETAIL_SPECIFICATION_CLASS);
 
 		for (Element element : es) {
-			productAttributes.add(element.getElementsByTag(CSConstants.SPAN).get(0)
-					.text());
-			productValues.add(element.getElementsByTag(CSConstants.SPAN).get(1).text());
+			
+			Elements data = element.getElementsByTag(CSConstants.SPAN) ; 
+			
+			productAttributes.add(data.get(0).text().replace(CSConstants.DASH, CSConstants.SPACE));
+			if(data.size()>1){
+				productValues.add(data.get(1).text().replace(CSConstants.DASH, CSConstants.SPACE));	
+			}else{
+				productValues.add("");	
+			}
+			
+		
 		}
 
 		product.setAttributes(productAttributes);
@@ -96,7 +113,6 @@ public class ParadigitCrawler {
 
 	}
 
-	
 	private StringBuilder combineValues(List<String> productAttributes,
 			List<String> productValues) {
 		List<String> combined = new ArrayList<>();
@@ -117,15 +133,17 @@ public class ParadigitCrawler {
 
 	private String getProduct(Document doc) throws Exception {
 
-		Elements e = doc.getElementsByClass(CSConstants.PRODUCT_TITLE_CONTAINER);
+		Elements e = doc
+				.getElementsByClass(CSConstants.PRODUCT_TITLE_CONTAINER);
 		return e.get(0).getElementsByTag(CSConstants.SPAN).text();
 
 	}
 
 	private String getPrice(Document doc) throws Exception {
-		
+
 		Element e = doc.getElementById(CSConstants.PRICE_PLACEHOLDER);
-		Elements es = e.getElementsByAttributeValue(CSConstants.ITEMPROP_ELEMENT, CSConstants.PRICE_ELEMENT);
+		Elements es = e.getElementsByAttributeValue(
+				CSConstants.ITEMPROP_ELEMENT, CSConstants.PRICE_ELEMENT);
 		return es.get(0).attr(CSConstants.CONTENT_ELEMENT);
 	}
 }
