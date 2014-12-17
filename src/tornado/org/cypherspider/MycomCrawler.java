@@ -6,16 +6,16 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import tornado.org.cypherspider.constants.CSConstants;
+import tornado.org.cypherspider.objects.Product;
 import tornado.org.neo4j.ProductDatabase;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MycomCrawler {
 
-	ArrayList<String> productSpecs = new ArrayList<String>();
-	ArrayList<String> productValues = new ArrayList<String>();
+	ArrayList<String> productSpecs = new ArrayList<>();
+	ArrayList<String> productValues = new ArrayList<>();
 
 	Product product = new Product();
 
@@ -50,9 +50,8 @@ public class MycomCrawler {
 		Elements es = doc
 				.getElementsByClass("product_details devider bg_light_gradient content_wrapper");
 		es = es.get(0).getElementsByTag("input");
-		String productId = es.get(0).attr("value");
 
-		return productId;
+		return es.get(0).attr("value");
 	}
 
 	private String createUrl(String productNumber) {
@@ -81,7 +80,7 @@ public class MycomCrawler {
 	private void getProductAttributes(Document doc) {
 
 		Elements es = doc.getElementById("specification").getElementsByClass(
-				"product_specification fullwidth");
+                "product_specification fullwidth");
 		for (Element e : es) {
 			Elements data = e.getElementsByTag("td");
 			productSpecs.add(data.get(data.size() - 2).text());
@@ -107,16 +106,6 @@ public class MycomCrawler {
 		return sb;
 	}
 
-	public String getElementText(String elementName, Document doc)
-			throws IOException {
-
-		Element element = doc.select(
-				CSConstants.ITEM_PROPERTY_OPEN + elementName
-						+ CSConstants.ITEM_PROPERTY_CLOSE).first();
-
-		return element.text();
-	}
-
 	private String getProductName(Document doc) throws Exception {
 
 		Elements es = doc.getElementsByClass("page_header clearfix fullwidth");
@@ -132,8 +121,7 @@ public class MycomCrawler {
 
 		Elements es = doc.getElementsByClass("product_price");
 		es = es.get(0).getElementsByTag("span");
-		String price = es.get(0).text();
 
-		return price;
+		return es.get(0).text();
 	}
 }

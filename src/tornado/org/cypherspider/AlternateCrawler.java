@@ -5,6 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import tornado.org.cypherspider.constants.CSConstants;
+import tornado.org.cypherspider.objects.Product;
 import tornado.org.neo4j.ProductDatabase;
 
 import java.io.IOException;
@@ -98,7 +99,7 @@ public class AlternateCrawler {
         return p.substring(2, p.length() - 1).replace(CSConstants.COMMA, CSConstants.PERIOD);
     }
 
-    public String getElementText(String elementName, Document doc) throws IOException {
+    private String getElementText(String elementName, Document doc) throws IOException {
 
         Element element = doc.select(CSConstants.ITEM_PROPERTY_OPEN + elementName + CSConstants.ITEM_PROPERTY_CLOSE).first();
 

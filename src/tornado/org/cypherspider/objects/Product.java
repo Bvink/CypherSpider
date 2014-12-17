@@ -1,4 +1,4 @@
-package tornado.org.cypherspider;
+package tornado.org.cypherspider.objects;
 
 import java.util.List;
 

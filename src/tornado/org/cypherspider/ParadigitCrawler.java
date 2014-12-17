@@ -6,9 +6,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import tornado.org.cypherspider.constants.CSConstants;
+import tornado.org.cypherspider.objects.Product;
 import tornado.org.neo4j.ProductDatabase;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,10 +72,10 @@ public class ParadigitCrawler {
 		Elements es = doc
 				.getElementsByClass("itemdetail-specificationstab-productfeaturecontainer");
 
-		for (int i = 0; i < es.size(); i++) {
-			productAttributes.add(es.get(i).getElementsByTag("span").get(0)
+		for (Element element : es) {
+			productAttributes.add(element.getElementsByTag("span").get(0)
 					.text());
-			productValues.add(es.get(i).getElementsByTag("span").get(1).text());
+			productValues.add(element.getElementsByTag("span").get(1).text());
 		}
 
 		product.setAttributes(productAttributes);
@@ -102,22 +102,10 @@ public class ParadigitCrawler {
 		return sb;
 	}
 
-	
-	public String getElementText(String elementName, Document doc)
-			throws IOException {
-
-		Element element = doc.select(
-				CSConstants.ITEM_PROPERTY_OPEN + elementName
-						+ CSConstants.ITEM_PROPERTY_CLOSE).first();
-
-		return element.text();
-	}
-
 	private String getProduct(Document doc) throws Exception {
 
 		Elements e = doc.getElementsByClass("itemdetail-producttitlecontainer");
-		String title = e.get(0).getElementsByTag("span").text();
-		return title;
+		return e.get(0).getElementsByTag("span").text();
 
 	}
 
@@ -125,8 +113,6 @@ public class ParadigitCrawler {
 		
 		Element e = doc.getElementById("ctl00_ContentPlaceHolder1_itemDetail_salespriceIncludingVATPriceLabel_pricePlaceHolder");
 		Elements es = e.getElementsByAttributeValue("itemprop", "price");
-		String price = es.get(0).attr("content");
-				
-		return price ;
+		return es.get(0).attr("content");
 	}
 }

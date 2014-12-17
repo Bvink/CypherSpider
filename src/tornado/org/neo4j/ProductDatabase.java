@@ -4,7 +4,7 @@ import org.neo4j.cypher.javacompat.ExecutionEngine;
 import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-import tornado.org.cypherspider.Product;
+import tornado.org.cypherspider.objects.Product;
 import tornado.org.neo4j.constants.NEOConstants;
 
 import java.text.DateFormat;
