@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78737ecc-f058-47c0-a82d-60a84f6fa9a8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tornado/org/Start.java" afterPath="$PROJECT_DIR$/src/tornado/org/Start.java" />
+      <change type="DELETED" beforePath="C:\Users\Calamity\IdeaProjects\CypherSpider\src\tornado\org\neo4j\TODO.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="2a385ba9-d441-445c-bb96-d5aaf3aa2e39" name="Failed commit: Default" comment="CypherSpider readme edit" />
@@ -59,16 +59,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Timer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tornado/org/core/api/utils/Timer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
-              <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="FindLinksOnParadigit.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tornado/org/FindLinksOnParadigit.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -116,8 +106,8 @@
       <file leaf-file-name="Start.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tornado/org/Start.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9166667" vertical-offset="85" max-vertical-offset="1054">
-              <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.7222222" vertical-offset="85" max-vertical-offset="1054">
+              <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -174,7 +164,6 @@
         <option value="$PROJECT_DIR$/src/tornado/org/neo4j/constants/LFConstants.java" />
         <option value="$PROJECT_DIR$/src/tornado/org/neo4j/constants/FLConstants.java" />
         <option value="$PROJECT_DIR$/src/tornado/org/core/api/utils/Timer.java" />
-        <option value="$PROJECT_DIR$/src/tornado/org/neo4j/TODO.txt" />
         <option value="$PROJECT_DIR$/src/tornado/org/neo4j/ProductDatabase.java" />
         <option value="$PROJECT_DIR$/src/tornado/org/neo4j/constants/NEOConstants.java" />
         <option value="$PROJECT_DIR$/src/tornado/org/fx/Gui.java" />
@@ -193,6 +182,7 @@
         <option value="$PROJECT_DIR$/src/tornado/org/cypherspider/constants/CSConstants.java" />
         <option value="$PROJECT_DIR$/src/tornado/org/cypherspider/ParadigitCrawler.java" />
         <option value="$PROJECT_DIR$/src/tornado/org/Start.java" />
+        <option value="$PROJECT_DIR$/src/tornado/org/neo4j/TODO.txt" />
       </list>
     </option>
   </component>
@@ -912,7 +902,11 @@
       <created>1418826685833</created>
       <updated>1418826685833</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="CypherSpider&#10;- Added a start switch">
+      <created>1418828578796</created>
+      <updated>1418828578796</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -920,7 +914,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -940,7 +934,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24919268" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24919268" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32894737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -967,7 +961,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="CypherSpider code cleanup" />
     <MESSAGE value="CypherSpider added timer class" />
     <MESSAGE value="CypherSpider added Product class" />
     <MESSAGE value="CypherSpider fixed productname bug" />
@@ -992,7 +985,8 @@
     <MESSAGE value="CypherSpider&#10;                         - Added endstate Settings" />
     <MESSAGE value="CypherSpider&#10;- Incorporated Endstate" />
     <MESSAGE value="CypherSpider&#10;- Removed a single line of nothing" />
-    <option name="LAST_COMMIT_MESSAGE" value="CypherSpider&#10;- Removed a single line of nothing" />
+    <MESSAGE value="CypherSpider&#10;- Added a start switch" />
+    <option name="LAST_COMMIT_MESSAGE" value="CypherSpider&#10;- Added a start switch" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1225,16 +1219,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tornado/org/neo4j/TODO.txt">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.8888888" vertical-offset="0" max-vertical-offset="697">
-          <caret line="3" column="84" selection-start-line="3" selection-start-column="84" selection-end-line="3" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tornado/org/fx/constants/FXConstants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
@@ -1403,8 +1387,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tornado/org/Start.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9166667" vertical-offset="85" max-vertical-offset="1054">
-          <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.7222222" vertical-offset="85" max-vertical-offset="1054">
+          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
           <folding />
         </state>
       </provider>
