@@ -18,7 +18,6 @@ public class ParadigitCrawler {
 
 	public String crawl(String url, ProductDatabase db) {
 
-
         StringBuilder sb = new StringBuilder();
 
         try {
