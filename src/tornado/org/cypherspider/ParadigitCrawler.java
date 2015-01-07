@@ -33,7 +33,7 @@ public class ParadigitCrawler {
 
 			product.setSite(CSConstants.PARADIGIT_URL);
 			product.setName(getProduct(doc));
-			product.setID(getProductNumber(doc));
+			//product.setID(getProductNumber(doc));
 			product.setPrice(getPrice(doc).replace(CSConstants.DASH,
 					CSConstants.DOUBLE_ZERO));
 			getProductAttributes(doc);
