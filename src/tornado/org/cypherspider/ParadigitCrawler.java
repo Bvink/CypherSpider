@@ -12,11 +12,19 @@ import tornado.org.neo4j.ProductDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
+
 public class ParadigitCrawler {
 
 	Product product = new Product();
 
 	public String crawl(String url, ProductDatabase db) {
+
+		// url weer splitten wordt anders bewaard in de database als
+		// productnumber
+
+		String uriWithProductNr = url.replace(
+				CSConstants.PARADIGIT_URL.replace("https", "http"), "");
 
 		StringBuilder sb = new StringBuilder();
 
@@ -29,15 +37,15 @@ public class ParadigitCrawler {
 			product.setPrice(getPrice(doc).replace(CSConstants.DASH,
 					CSConstants.DOUBLE_ZERO));
 			getProductAttributes(doc);
-            String productNumber = getProductNumber(doc);
 
-            sb = includeInfo(sb, productNumber);
+			sb = includeInfo(sb, uriWithProductNr);
 
-            product.setSite(CSConstants.PARADIGIT_URL);
-            product.setName(getProduct(doc));
-            product.setID(productNumber);
-            product.setPrice(getPrice(doc).replace(CSConstants.DASH, CSConstants.DOUBLE_ZERO));
-           getProductAttributes(doc);
+			product.setSite(CSConstants.PARADIGIT_URL);
+			product.setName(getProduct(doc));
+			product.setID(uriWithProductNr);
+			product.setPrice(getPrice(doc).replace(CSConstants.DASH,
+					CSConstants.DOUBLE_ZERO));
+			getProductAttributes(doc);
 
 			db.createAlternateProductNodes(product);
 			sb = productPropertiesOutput(sb, product);
@@ -56,8 +64,8 @@ public class ParadigitCrawler {
 
 		productNumber = es.get(es.size() - 1)
 				.getElementsByTag(CSConstants.SPAN).get(0).text();
-		productNumber = es.get(es.size() - 1).getElementsByTag(CSConstants.SPAN).get(1)
-				.text();
+		productNumber = es.get(es.size() - 1)
+				.getElementsByTag(CSConstants.SPAN).get(1).text();
 
 		return productNumber;
 	}
@@ -77,15 +85,13 @@ public class ParadigitCrawler {
 		return sb;
 	}
 
-    private StringBuilder includeInfo(StringBuilder sb, String productNumber) {
-        sb.append(CSConstants.WEBSITE_STR)
-                .append(CSConstants.PARADIGIT_URL)
-                .append(CSConstants.LINE_SEPERATOR)
-                .append(CSConstants.PRODUCT_NUMBER_STR)
-                .append(productNumber)
-                .append(CSConstants.LINE_SEPERATOR);
-        return sb;
-    }
+	private StringBuilder includeInfo(StringBuilder sb, String productNumber) {
+		sb.append(CSConstants.WEBSITE_STR).append(CSConstants.PARADIGIT_URL)
+				.append(CSConstants.LINE_SEPERATOR)
+				.append(CSConstants.PRODUCT_NUMBER_STR).append(productNumber)
+				.append(CSConstants.LINE_SEPERATOR);
+		return sb;
+	}
 
 	private void getProductAttributes(Document doc) {
 		List<String> productAttributes = new ArrayList<>();
@@ -95,17 +101,18 @@ public class ParadigitCrawler {
 				.getElementsByClass(CSConstants.ITEMDETAIL_SPECIFICATION_CLASS);
 
 		for (Element element : es) {
-			
-			Elements data = element.getElementsByTag(CSConstants.SPAN) ; 
-			
-			productAttributes.add(data.get(0).text().replace(CSConstants.DASH, CSConstants.SPACE));
-			if(data.size()>1){
-				productValues.add(data.get(1).text().replace(CSConstants.DASH, CSConstants.SPACE));	
-			}else{
-				productValues.add(CSConstants.EMPTY);	
+
+			Elements data = element.getElementsByTag(CSConstants.SPAN);
+
+			productAttributes.add(data.get(0).text()
+					.replace(CSConstants.DASH, CSConstants.SPACE));
+			if (data.size() > 1) {
+				productValues.add(data.get(1).text()
+						.replace(CSConstants.DASH, CSConstants.SPACE));
+			} else {
+				productValues.add(CSConstants.EMPTY);
 			}
-			
-		
+
 		}
 
 		product.setAttributes(productAttributes);

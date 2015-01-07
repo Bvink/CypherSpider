@@ -120,7 +120,7 @@ public class FindLinksOnParadigit extends Thread {
 		productDatabase.createDB();
 
 		for (int i = 0; i < productlinks.size(); i++) {
-			PARADIGIT_CRAWLER.crawl(url+productlinks.get(i), productDatabase);
+			PARADIGIT_CRAWLER.crawl(url + productlinks.get(i), productDatabase);
 		}
 
 	}
