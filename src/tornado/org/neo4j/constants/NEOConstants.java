@@ -2,7 +2,8 @@ package tornado.org.neo4j.constants;
 
 public class NEOConstants {
 
-    public final static String DB_PATH =  "c:/Neo4J";
+    public final static String DB_PATH_WINDOWS =  "c:/Neo4J";
+    public final static String DB_PATH_UBUNTU =  "/var/lib/neo4j/nucleus";
     public final static String DB_SHUTDOWN_MESSAGE = "graphDB shut down.";
 
     public final static Boolean SYSTEM_OUTPUT = false;
