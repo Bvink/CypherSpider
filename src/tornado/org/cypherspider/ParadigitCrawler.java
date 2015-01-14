@@ -31,12 +31,12 @@ public class ParadigitCrawler {
 		try {
 			Document doc = Jsoup.connect(url).get();
 
-			product.setSite(CSConstants.PARADIGIT_URL);
+/*			product.setSite(CSConstants.PARADIGIT_URL);
 			product.setName(getProduct(doc));
 			//product.setID(getProductNumber(doc));
 			product.setPrice(getPrice(doc).replace(CSConstants.DASH,
 					CSConstants.DOUBLE_ZERO));
-			getProductAttributes(doc);
+			getProductAttributes(doc);*/
 
 			sb = includeInfo(sb, uriWithProductNr);
 
