@@ -6,8 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78737ecc-f058-47c0-a82d-60a84f6fa9a8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tornado/org/neo4j/constants/NEOConstants.java" afterPath="$PROJECT_DIR$/src/tornado/org/neo4j/constants/NEOConstants.java" />
+    <list default="true" id="78737ecc-f058-47c0-a82d-60a84f6fa9a8" name="Default" comment="CypherSpider formatting edit">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tornado/org/Start.java" afterPath="$PROJECT_DIR$/src/tornado/org/Start.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="CypherSpider.iws" />
@@ -31,10 +31,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="NEOConstants.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="NEOConstants.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tornado/org/neo4j/constants/NEOConstants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.09199134" vertical-offset="0" max-vertical-offset="924">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
               <caret line="5" column="50" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
               <folding />
             </state>
@@ -71,11 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Start.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Start.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tornado/org/Start.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="9" max-vertical-offset="1190">
-              <caret line="23" column="58" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="58" />
+            <state vertical-scroll-proportion="0.47171825" vertical-offset="0" max-vertical-offset="1241">
+              <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -184,8 +184,8 @@
         <option value="$PROJECT_DIR$/src/tornado/org/cypherspider/constants/CSConstants.java" />
         <option value="$PROJECT_DIR$/src/tornado/org/neo4j/ProductDatabase.java" />
         <option value="$PROJECT_DIR$/src/tornado/org/settings/Settings.java" />
-        <option value="$PROJECT_DIR$/src/tornado/org/Start.java" />
         <option value="$PROJECT_DIR$/src/tornado/org/neo4j/constants/NEOConstants.java" />
+        <option value="$PROJECT_DIR$/src/tornado/org/Start.java" />
       </list>
     </option>
   </component>
@@ -804,7 +804,11 @@
       <created>1421255770161</created>
       <updated>1421255770161</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="CypherSpider formatting edit">
+      <created>1421255870972</created>
+      <updated>1421255870972</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1242,18 +1246,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tornado/org/Start.java">
+    <entry file="file://$PROJECT_DIR$/src/tornado/org/neo4j/constants/NEOConstants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="9" max-vertical-offset="1190">
-          <caret line="23" column="58" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="58" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
+          <caret line="5" column="50" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tornado/org/neo4j/constants/NEOConstants.java">
+    <entry file="file://$PROJECT_DIR$/src/tornado/org/Start.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09199134" vertical-offset="0" max-vertical-offset="924">
-          <caret line="5" column="50" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.47171825" vertical-offset="0" max-vertical-offset="1241">
+          <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
           <folding />
         </state>
       </provider>

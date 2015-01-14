@@ -24,6 +24,9 @@ public class Start {
                 Settings.setOS(NEOConstants.DB_PATH_UBUNTU);
                 break;
             default:
+                System.out.println("Please supply an OS!");
+                System.out.println("windows");
+                System.out.println("ubuntu");
                 break;
 
         }
