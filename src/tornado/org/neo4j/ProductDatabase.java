@@ -4,7 +4,6 @@ import org.neo4j.cypher.javacompat.ExecutionEngine;
 import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-import tornado.org.cypherspider.constants.CSConstants;
 import tornado.org.cypherspider.objects.Product;
 import tornado.org.neo4j.constants.NEOConstants;
 
@@ -70,7 +69,7 @@ public class ProductDatabase {
         // "MERGE (p:Product { name : '" + name + "', productnumber: '" + productNumber + "', price : " + price + ", date: '" + getDateTime() + "' })"
         StringBuilder query = new StringBuilder();
         query.append(NEOConstants.PRODUCT_MERGE_QUERY[0])
-                .append(product.getName().replaceAll("\\\\", ""))
+                .append(product.getName().replaceAll("\\\\", "").replaceAll("'", ""))
                 .append(NEOConstants.PRODUCT_MERGE_QUERY[1])
                 .append(product.getProductNumber())
                 .append(NEOConstants.PRODUCT_MERGE_QUERY[2])
@@ -95,7 +94,7 @@ public class ProductDatabase {
         // "MATCH (p:Product),(w:Website) WHERE p.name = '" + name + "' AND p.price =" + price + " AND w.url = '" + site + "' MERGE (p)-[r:BELONGS_TO]->(w) ";
         StringBuilder query = new StringBuilder();
         query.append(NEOConstants.PRODUCT_WEBSITE_RELATIONSHIP_QUERY[0])
-                .append(product.getName().replaceAll("\\\\", ""))
+                .append(product.getName().replaceAll("\\\\", "").replaceAll("'", ""))
                 .append(NEOConstants.PRODUCT_WEBSITE_RELATIONSHIP_QUERY[1])
                 .append(product.getPrice())
                 .append(NEOConstants.PRODUCT_WEBSITE_RELATIONSHIP_QUERY[2])
@@ -109,9 +108,9 @@ public class ProductDatabase {
         //"MERGE (a:Attribute { type : '" + productAttributes.get(i) + "', value : '" + productValues.get(i) + "' })";
         StringBuilder query = new StringBuilder();
         query.append(NEOConstants.PRODUCT_ATTRIBUTE_MERGE_QUERY[0])
-                .append(attribute.replaceAll("\\\\", ""))
+                .append(attribute.replaceAll("\\\\", "").replaceAll("'", ""))
                 .append(NEOConstants.PRODUCT_ATTRIBUTE_MERGE_QUERY[1])
-                .append(value.replaceAll("\\\\", ""))
+                .append(value.replaceAll("\\\\", "").replaceAll("'", ""))
                 .append(NEOConstants.PRODUCT_ATTRIBUTE_MERGE_QUERY[2]);
 
         return query.toString();
@@ -121,13 +120,13 @@ public class ProductDatabase {
         //"MATCH (p:Product),(a:Attribute) WHERE p.name = '" + name + "' AND p.price =" + price + " AND a.type = '" + productAttributes.get(i) + "' AND a.value = '" + productValues.get(i) + "' MERGE (p)-[r:HAS_PROPERTY]->(a) ";
         StringBuilder query = new StringBuilder();
         query.append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[0])
-                .append(product.getName().replaceAll("\\\\", ""))
+                .append(product.getName().replaceAll("\\\\", "".replaceAll("'", "")))
                 .append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[1])
                 .append(product.getPrice())
                 .append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[2])
-                .append(attribute.replaceAll("\\\\", ""))
+                .append(attribute.replaceAll("\\\\", "").replaceAll("'", ""))
                 .append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[3])
-                .append(value.replaceAll("\\\\", ""))
+                .append(value.replaceAll("\\\\", "").replaceAll("'", ""))
                 .append(NEOConstants.PRODUCT_ATTRIBUTE_RELATIONSHIP_QUERY[4]);
         return query.toString();
     }
