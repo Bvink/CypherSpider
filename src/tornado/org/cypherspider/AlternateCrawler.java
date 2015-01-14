@@ -76,17 +76,60 @@ public class AlternateCrawler {
     private List<String> getProductAttributes(Document doc) {
         Elements firstRow = doc.getElementsByClass(CSConstants.COLUMN_ONE);
         List<String> productAttributes = new ArrayList<>();
-        for (Element element : firstRow) {
-            productAttributes.add(element.text());
+        if (!firstRow.isEmpty()) {
+            for (Element element : firstRow) {
+                productAttributes.add(element.text());
+            }
+        } else {
+            Elements rows = doc.getElementsByClass(CSConstants.MOTHERBOARD_TABLE_NAME);
+            for (Element row : rows.select(CSConstants.TD)) {
+                Elements col = row.getElementsByClass(CSConstants.TCOL_ONE);
+
+                if (!col.text().equals(CSConstants.EMPTY)) {
+                    productAttributes.add(col.text());
+                }
+            }
         }
+
         return productAttributes;
     }
 
     private List<String> getProductValues(Document doc) {
         Elements secondRow = doc.getElementsByClass(CSConstants.COLUMN_TWO);
         List<String> productValues = new ArrayList<>();
-        for (Element element : secondRow) {
-            productValues.add(element.text());
+        if (!secondRow.isEmpty()) {
+            for (Element element : secondRow) {
+                productValues.add(element.text());
+            }
+        } else {
+            Elements rows = doc.getElementsByClass(CSConstants.MOTHERBOARD_TABLE_NAME);
+            int i = 0;
+            for (Element row : rows.select(CSConstants.TD)) {
+                StringBuilder subsb = new StringBuilder();
+                Elements colOne = row.getElementsByClass(CSConstants.TCOL_ONE);
+                Elements colTwo = row.getElementsByClass(CSConstants.TCOL_TWO);
+                Elements colThree = row.getElementsByClass(CSConstants.TCOL_THREE);
+                Elements colFour = row.getElementsByClass(CSConstants.TCOL_FOUR);
+                if (colOne.text().equals(CSConstants.EMPTY) && i > 0) {
+                    subsb.append(productValues.get(i - 1))
+                            .append(CSConstants.SPACE)
+                            .append(colTwo.text())
+                            .append(CSConstants.SPACE)
+                            .append(colThree.text())
+                            .append(CSConstants.SPACE)
+                            .append(colFour.text());
+                    productValues.set(i - 1, subsb.toString());
+
+                } else {
+                    subsb.append(colTwo.text())
+                            .append(CSConstants.SPACE)
+                            .append(colThree.text())
+                            .append(CSConstants.SPACE)
+                            .append(colFour.text());
+                    productValues.add(subsb.toString());
+                    i++;
+                }
+            }
         }
         return productValues;
     }
@@ -96,14 +139,13 @@ public class AlternateCrawler {
         StringBuilder sb = new StringBuilder();
         if (productAttributes.size() == productValues.size()) {
             for (int i = 0; i < productAttributes.size() && i < productValues.size(); i++) {
-                combined.add(productAttributes.get(i) + " " + productValues.get(i));
+                combined.add(productAttributes.get(i) + CSConstants.SPACE + productValues.get(i));
             }
         }
-        for (String c : combined) {
-            sb.append(c)
-                    .append(CSConstants.LINE_SEPERATOR);
+        for (String s : combined) {
+            sb.append(s);
+            sb.append(CSConstants.LINE_SEPERATOR);
         }
-
         return sb;
     }
 
