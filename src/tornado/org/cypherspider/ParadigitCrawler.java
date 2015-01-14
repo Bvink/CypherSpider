@@ -142,7 +142,7 @@ public class ParadigitCrawler {
 
 		Elements e = doc
 				.getElementsByClass(CSConstants.PRODUCT_TITLE_CONTAINER);
-		return e.get(0).getElementsByTag(CSConstants.SPAN).text();
+		return e.get(0).getElementsByTag(CSConstants.SPAN).text().replace(CSConstants.DASH, CSConstants.SPACE);
 
 	}
 

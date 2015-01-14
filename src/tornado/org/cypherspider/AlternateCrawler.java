@@ -78,7 +78,7 @@ public class AlternateCrawler {
         List<String> productAttributes = new ArrayList<>();
         if (!firstRow.isEmpty()) {
             for (Element element : firstRow) {
-                productAttributes.add(element.text());
+                productAttributes.add(element.text().replace(CSConstants.DASH, CSConstants.SPACE));
             }
         } else {
             Elements rows = doc.getElementsByClass(CSConstants.MOTHERBOARD_TABLE_NAME);
@@ -86,7 +86,7 @@ public class AlternateCrawler {
                 Elements col = row.getElementsByClass(CSConstants.TCOL_ONE);
 
                 if (!col.text().equals(CSConstants.EMPTY)) {
-                    productAttributes.add(col.text());
+                    productAttributes.add(col.text().replace(CSConstants.DASH, CSConstants.SPACE));
                 }
             }
         }
@@ -99,7 +99,7 @@ public class AlternateCrawler {
         List<String> productValues = new ArrayList<>();
         if (!secondRow.isEmpty()) {
             for (Element element : secondRow) {
-                productValues.add(element.text());
+                productValues.add(element.text().replace(CSConstants.DASH, CSConstants.SPACE));
             }
         } else {
             Elements rows = doc.getElementsByClass(CSConstants.MOTHERBOARD_TABLE_NAME);
@@ -118,7 +118,7 @@ public class AlternateCrawler {
                             .append(colThree.text())
                             .append(CSConstants.SPACE)
                             .append(colFour.text());
-                    productValues.set(i - 1, subsb.toString());
+                    productValues.set(i - 1, subsb.toString().replace(CSConstants.DASH, CSConstants.SPACE));
 
                 } else {
                     subsb.append(colTwo.text())
@@ -126,7 +126,7 @@ public class AlternateCrawler {
                             .append(colThree.text())
                             .append(CSConstants.SPACE)
                             .append(colFour.text());
-                    productValues.add(subsb.toString());
+                    productValues.add(subsb.toString().replace(CSConstants.DASH, CSConstants.SPACE));
                     i++;
                 }
             }
@@ -165,7 +165,7 @@ public class AlternateCrawler {
         sb.append(getElementText(CSConstants.BRAND_ELEMENT, doc))
                 .append(CSConstants.SPACE)
                 .append(doc.select(CSConstants.META_ELEMENT).get(CSConstants.ALTERNATE_META_INDEX).attr(CSConstants.CONTENT_ELEMENT));
-        return sb.toString();
+        return sb.toString().replace(CSConstants.DASH, CSConstants.SPACE);
     }
 
     private String getPrice(Document doc) throws Exception {
