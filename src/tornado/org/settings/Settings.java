@@ -5,6 +5,7 @@ public class Settings {
     private static boolean alternateEndstate = false;
     private static boolean mycomEndstate = false;
     private static boolean paradigitEndstate = false;
+    private static String OS_PATH = "c:/Neo4J";
 
     public static void setAlternateEndstate(boolean state) {
         alternateEndstate = state;
@@ -17,6 +18,8 @@ public class Settings {
     public static void setParadigitEndstate(boolean state) {
         paradigitEndstate = state;
     }
+
+    public static void setOS(String chosenOS) { OS_PATH = chosenOS; }
 
     public static boolean getAlternateEndstate() {
         return alternateEndstate;
@@ -34,4 +37,5 @@ public class Settings {
         return alternateEndstate && mycomEndstate && paradigitEndstate;
     }
 
+    public static String getOS() { return OS_PATH;}
 }

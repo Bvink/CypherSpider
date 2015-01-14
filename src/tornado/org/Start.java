@@ -2,6 +2,7 @@ package tornado.org;
 
 import javafx.application.Application;
 import tornado.org.fx.Gui;
+import tornado.org.neo4j.constants.NEOConstants;
 import tornado.org.settings.Settings;
 
 import java.util.List;
@@ -16,6 +17,18 @@ public class Start {
         Settings.setParadigitEndstate(false);
 
         switch (args[0].toLowerCase()) {
+            case "windows":
+                Settings.setOS(NEOConstants.DB_PATH_WINDOWS);
+                break;
+            case "ubuntu":
+                Settings.setOS(NEOConstants.DB_PATH_UBUNTU);
+                break;
+            default:
+                break;
+
+        }
+
+        switch (args[1].toLowerCase()) {
             case "crawl":
                 startAlternateCrawler();
                 //startMycomCrawler();

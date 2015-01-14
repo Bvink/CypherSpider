@@ -6,6 +6,7 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import tornado.org.cypherspider.objects.Product;
 import tornado.org.neo4j.constants.NEOConstants;
+import tornado.org.settings.Settings;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class ProductDatabase {
 	// TODO hiervan mag er maar een van zijn anders blokkeert het de database en kan je maar een thread starten.
-    private static GraphDatabaseService graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(NEOConstants.DB_PATH);
+    private static GraphDatabaseService graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(Settings.getOS());
     private static ExecutionEngine engine;
 
 
