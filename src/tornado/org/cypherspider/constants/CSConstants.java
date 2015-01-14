@@ -46,6 +46,7 @@ public class CSConstants {
     public static final String EURO = "€";
     public static final String LINE_SEPERATOR = System.getProperty("line.separator");
     public static final String DASH = "-";
+    public final static String SLASH = "/";
     public static final String COMMA = ",";
     public static final String PERIOD = ".";
     public static final String SPACE = " ";
