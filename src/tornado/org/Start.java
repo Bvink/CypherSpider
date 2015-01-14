@@ -18,14 +18,11 @@ public class Start {
         switch (args[0].toLowerCase()) {
             case "crawl":
                 startAlternateCrawler();
-                startMycomCrawler();
+                //startMycomCrawler();
                 startParadigitCrawler();
                 break;
             case "alternate":
                 startAlternateCrawler();
-                break;
-            case "mycom":
-                startMycomCrawler();
                 break;
             case "paradigit":
                 startParadigitCrawler();
@@ -37,7 +34,6 @@ public class Start {
                 System.out.println("Please supply an argument!");
                 System.out.println("crawl");
                 System.out.println("alternate");
-                System.out.println("mycom");
                 System.out.println("paradigit");
                 System.out.println("debug");
                 break;

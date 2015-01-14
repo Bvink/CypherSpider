@@ -14,6 +14,7 @@ public class CSConstants {
     public static final String WEBSITE_STR = "Website: ";
     public static final String PRODUCT_NUMBER_STR = "Product nummer: ";
 
+    public static final String MOTHERBOARD_TABLE_NAME = "techData";
     public static final String COLUMN_ONE = "techDataCol1";
     public static final String COLUMN_TWO = "techDataCol2";
 
@@ -53,6 +54,11 @@ public class CSConstants {
     public static final String SPAN = "span";
     public static final String EMPTY = "";
     public static final String MYCOM_REPLACEMENT_STRING = " - MyCom";
+    public static final String TCOL_ONE = "c1";
+    public static final String TCOL_TWO = "c2";
+    public static final String TCOL_THREE = "c3";
+    public static final String TCOL_FOUR = "c4";
+
 
 
     public static final String RETRIEVE_ERROR = "The crawler has failed retrieving data";

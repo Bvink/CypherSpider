@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     @FXML private Button fetchAlternateInfoButton;
-    @FXML private Button fetchMycomInfoButton;
+    //@FXML private Button fetchMycomInfoButton;
     @FXML private Button fetchParadigitInfoButton;
     @FXML private Button queryButton;
     @FXML private TextField input;
@@ -33,7 +33,7 @@ public class Controller implements Initializable {
 
         DB.createDB();
         final AlternateCrawler alternateCrawler = new AlternateCrawler();
-        final MycomCrawler mycomCrawler = new MycomCrawler();
+        //final MycomCrawler mycomCrawler = new MycomCrawler();
         final ParadigitCrawler paradigitCrawler = new ParadigitCrawler();
 
         fetchAlternateInfoButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -45,6 +45,7 @@ public class Controller implements Initializable {
             }
         });
 
+        /**
         fetchMycomInfoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -53,6 +54,7 @@ public class Controller implements Initializable {
                 output.setText(mycomCrawler.crawl(input.getText(), DB));
             }
         });
+         **/
 
         fetchParadigitInfoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
