@@ -11,7 +11,8 @@ public class NEOConstants {
     public final static String QUERY_ANNOUNCER = "method query\n";
     public final static String DATE_FORMAT = "yyyy/MM/dd HH:mm:ss";
 
-    public final static String[] PRODUCT_MERGE_QUERY = {"MERGE (p:Product { name : '", "', productnumber: '", "', price : ", ", date: '", "' })"};
+    public final static String[] PRODUCT_DELETE_QUERY = {"MATCH (p:Product)-[r]-() WHERE p.name = \"", "\" AND p.productnumber = \"", "\" DELETE p, r"};
+    public final static String[] PRODUCT_MERGE_QUERY = {"MERGE (p:Product { name : '", "', type: '", "', productnumber: '", "', price : ", ", date: '", "' })"};
     public final static String[] WEBSITE_MERGE_QUERY = {"MERGE (w:Website { url : '", "' })"};
     public final static String[] PRODUCT_WEBSITE_RELATIONSHIP_QUERY = {"MATCH (p:Product),(w:Website) WHERE p.name = '", "' AND p.price =", " AND w.url = '", "' MERGE (p)-[r:BELONGS_TO]->(w) "};
     public final static String[] PRODUCT_ATTRIBUTE_MERGE_QUERY = {"MERGE (a:Attribute { type : '", "', value : '", "' })"};

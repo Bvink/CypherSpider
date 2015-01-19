@@ -5,8 +5,6 @@ import tornado.org.fx.Gui;
 import tornado.org.neo4j.constants.NEOConstants;
 import tornado.org.settings.Settings;
 
-import java.util.List;
-
 
 public class Start {
 

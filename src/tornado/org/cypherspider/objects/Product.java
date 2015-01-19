@@ -3,9 +3,9 @@ package tornado.org.cypherspider.objects;
 import java.util.List;
 
 public class Product {
-
     private String site;
     private String name;
+    private String type;
     private String price;
     private String productNumber;
     private List<String> attributes;
@@ -26,6 +26,10 @@ public class Product {
     public String getName() {
         return name;
     }
+
+    public void setType(String type) { this.type = type; }
+
+    public String getType() { return type; }
 
     public void setPrice(String price) {
         this.price = price;

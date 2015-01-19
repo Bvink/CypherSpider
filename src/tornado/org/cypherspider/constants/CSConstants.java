@@ -10,6 +10,7 @@ public class CSConstants {
     public static final int ALTERNATE_META_INDEX = 7;
 
     public static final String PRODUCT_OUTPUT_STR = "Product: ";
+    public static final String PRODUCT_TYPE_OUTPUT_STR = "type: ";
     public static final String PRIJS_OUTPUT_STR = "Prijs: ";
     public static final String WEBSITE_STR = "Website: ";
     public static final String PRODUCT_NUMBER_STR = "Product nummer: ";
@@ -33,6 +34,8 @@ public class CSConstants {
     public static final String VALUE_ELEMENT = "value";
     public static final String SPECIFICATION_ELEMENT = "specification";
     public static final String ITEMPROP_ELEMENT = "itemprop";
+    public static final String PRODUCT_TYPE_SELECTOR_ALTERNATE = ".breadCrumbs > span:nth-child(2) > a:nth-child(1) > span:nth-child(1)";
+    public static final String PRODUCT_TYPE_SELECTOR_PARADIGIT = "div.breadcrumbcontainer:nth-child(3) > a:nth-child(1)";
 
     public static final String PRODUCT_TITLE_CONTAINER = "itemdetail-producttitlecontainer";
     public static final String PRICE_PLACEHOLDER = "ctl00_ContentPlaceHolder1_itemDetail_salespriceIncludingVATPriceLabel_pricePlaceHolder";
@@ -46,7 +49,8 @@ public class CSConstants {
     public static final String EURO = "€";
     public static final String LINE_SEPERATOR = System.getProperty("line.separator");
     public static final String DASH = "-";
-    public final static String SLASH = "/";
+    public static final String BACKSLASH = "\\\\";
+    public static final String APOSTROPHE = "'";
     public static final String COMMA = ",";
     public static final String PERIOD = ".";
     public static final String SPACE = " ";

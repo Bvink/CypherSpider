@@ -28,6 +28,7 @@ public class AlternateCrawler {
             Product product = new Product();
             product.setSite(CSConstants.ALTERNATE_URL);
             product.setName(getProduct(doc));
+            product.setType(getType(doc));
             product.setID(productNumber);
             product.setPrice(getPrice(doc).replace(CSConstants.DASH, CSConstants.DOUBLE_ZERO));
             product.setAttributes(getProductAttributes(doc));
@@ -53,6 +54,9 @@ public class AlternateCrawler {
     private StringBuilder productPropertiesOutput(StringBuilder sb, Product product) {
         sb.append(CSConstants.PRODUCT_OUTPUT_STR)
                 .append(product.getName())
+                .append(CSConstants.LINE_SEPERATOR)
+                .append(CSConstants.PRODUCT_TYPE_OUTPUT_STR)
+                .append(product.getType())
                 .append(CSConstants.LINE_SEPERATOR)
                 .append(CSConstants.PRIJS_OUTPUT_STR)
                 .append(CSConstants.EURO)
@@ -158,6 +162,12 @@ public class AlternateCrawler {
         Element element = doc.select(CSConstants.ITEM_PROPERTY_OPEN + elementName + CSConstants.ITEM_PROPERTY_CLOSE).first();
 
         return element.text();
+    }
+
+    private String getType(Document doc) throws  Exception {
+        String selector = CSConstants.PRODUCT_TYPE_SELECTOR_ALTERNATE;
+        Elements elements = doc.select( selector );
+        return elements.get(0).text();
     }
 
     private String getProduct(Document doc) throws Exception {
