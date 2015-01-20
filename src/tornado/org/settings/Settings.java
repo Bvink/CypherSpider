@@ -7,6 +7,9 @@ public class Settings {
     private static boolean paradigitEndstate = false;
     private static String OS_PATH = "c:/Neo4J";
 
+    public final static Boolean SYSTEM_OUTPUT = false;
+    public final static Boolean DELETE_OLD_PRODUCTS_MODE = true;
+
     public static void setAlternateEndstate(boolean state) {
         alternateEndstate = state;
     }

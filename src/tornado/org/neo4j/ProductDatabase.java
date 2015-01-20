@@ -53,7 +53,7 @@ public class ProductDatabase {
         //TODO ExecutionEngine wordt te vaak aangemaakt, zorgt voor Crash, zie of het niet een globale variable kan worden 
        // ExecutionEngine engine = new ExecutionEngine(graphDb);
 
-        executeQuery(productDelete(product), engine);
+        if (Settings.DELETE_OLD_PRODUCTS_MODE) { executeQuery(productDelete(product), engine); }
         executeQuery(productMerge(product), engine);
         executeQuery(websiteMerge(product), engine);
         executeQuery(productWebsiteRelationship(product), engine);
@@ -148,7 +148,7 @@ public class ProductDatabase {
     }
 
     private void executeQuery(String query, ExecutionEngine engine) {
-        if (NEOConstants.SYSTEM_OUTPUT) {
+        if (Settings.SYSTEM_OUTPUT) {
            System.out.println(NEOConstants.QUERY_ANNOUNCER + query);
         }
         engine.execute(query);

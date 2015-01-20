@@ -6,8 +6,6 @@ public class NEOConstants {
     public final static String DB_PATH_UBUNTU =  "/var/lib/neo4j/nucleus";
     public final static String DB_SHUTDOWN_MESSAGE = "graphDB shut down.";
 
-    public final static Boolean SYSTEM_OUTPUT = false;
-
     public final static String QUERY_ANNOUNCER = "method query\n";
     public final static String DATE_FORMAT = "yyyy/MM/dd HH:mm:ss";
 
