@@ -86,6 +86,7 @@ public class ProductDatabase {
     }
 
     private String productDelete(Product product) {
+        //"MATCH (p:Product)-[r]-() WHERE p.name = '" + name + "' AND p.productnumber = '" + productnumber + "' DELETE p, r"
         StringBuilder query = new StringBuilder();
         query.append(NEOConstants.PRODUCT_DELETE_QUERY[0])
                 .append(product.getName())
