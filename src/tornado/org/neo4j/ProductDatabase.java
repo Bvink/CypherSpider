@@ -53,7 +53,7 @@ public class ProductDatabase {
         //TODO ExecutionEngine wordt te vaak aangemaakt, zorgt voor Crash, zie of het niet een globale variable kan worden 
        // ExecutionEngine engine = new ExecutionEngine(graphDb);
 
-        //executeQuery(productDelete(product), engine);
+        executeQuery(productDelete(product), engine);
         executeQuery(productMerge(product), engine);
         executeQuery(websiteMerge(product), engine);
         executeQuery(productWebsiteRelationship(product), engine);
