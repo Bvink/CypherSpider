@@ -1,6 +1,9 @@
 package tornado.org;
 
 import javafx.application.Application;
+import tornado.org.cypherspider.productcrawlers.FindLinksOnAlternate;
+import tornado.org.cypherspider.productcrawlers.FindLinksOnMycom;
+import tornado.org.cypherspider.productcrawlers.FindLinksOnParadigit;
 import tornado.org.fx.Gui;
 import tornado.org.neo4j.constants.NEOConstants;
 import tornado.org.settings.Settings;
@@ -14,12 +17,16 @@ public class Start {
         Settings.setMycomEndstate(false);
         Settings.setParadigitEndstate(false);
 
+        if (args[0] == null) { args[0] = "help"; }
+
         switch (args[0].toLowerCase()) {
             case "windows":
                 Settings.setOS(NEOConstants.DB_PATH_WINDOWS);
+                setupCrawler(args[1]);
                 break;
             case "ubuntu":
                 Settings.setOS(NEOConstants.DB_PATH_UBUNTU);
+                setupCrawler(args[1]);
                 break;
             default:
                 System.out.println("Please supply an OS!");
@@ -28,8 +35,10 @@ public class Start {
                 break;
 
         }
+    }
 
-        switch (args[1].toLowerCase()) {
+    private static void setupCrawler(String arg) {
+        switch (arg.toLowerCase()) {
             case "crawl":
                 startAlternateCrawler();
                 //startMycomCrawler();

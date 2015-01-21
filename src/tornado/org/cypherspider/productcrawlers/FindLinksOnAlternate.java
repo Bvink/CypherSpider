@@ -1,4 +1,4 @@
-package tornado.org;
+package tornado.org.cypherspider.productcrawlers;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 
-import tornado.org.cypherspider.AlternateCrawler;
-import tornado.org.neo4j.ProductDatabase;
-import tornado.org.cypherspider.AlternateCrawler;
+import tornado.org.cypherspider.pagecrawlers.AlternateCrawler;
 import tornado.org.neo4j.ProductDatabase;
 import tornado.org.settings.Settings;
 

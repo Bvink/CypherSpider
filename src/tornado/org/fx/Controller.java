@@ -8,9 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import tornado.org.cypherspider.AlternateCrawler;
-import tornado.org.cypherspider.MycomCrawler;
-import tornado.org.cypherspider.ParadigitCrawler;
+import tornado.org.cypherspider.pagecrawlers.AlternateCrawler;
+import tornado.org.cypherspider.pagecrawlers.ParadigitCrawler;
 import tornado.org.fx.constants.FXConstants;
 import tornado.org.neo4j.ProductDatabase;
 

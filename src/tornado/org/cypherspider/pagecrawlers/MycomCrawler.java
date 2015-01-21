@@ -1,4 +1,4 @@
-package tornado.org.cypherspider;
+package tornado.org.cypherspider.pagecrawlers;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
