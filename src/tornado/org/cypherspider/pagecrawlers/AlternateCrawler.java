@@ -4,6 +4,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import tornado.org.core.api.utils.Combiner;
 import tornado.org.cypherspider.constants.CSConstants;
 import tornado.org.cypherspider.objects.Product;
 import tornado.org.neo4j.ProductDatabase;
@@ -62,7 +63,7 @@ public class AlternateCrawler {
                 .append(CSConstants.EURO)
                 .append(product.getPrice())
                 .append(CSConstants.LINE_SEPERATOR)
-                .append(combineValues(product.getAttributes(), product.getValues()));
+                .append(Combiner.combineLists(product.getAttributes(), product.getValues()));
 
         return sb;
     }
@@ -136,21 +137,6 @@ public class AlternateCrawler {
             }
         }
         return productValues;
-    }
-
-    private StringBuilder combineValues(List<String> productAttributes, List<String> productValues) {
-        List<String> combined = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
-        if (productAttributes.size() == productValues.size()) {
-            for (int i = 0; i < productAttributes.size() && i < productValues.size(); i++) {
-                combined.add(productAttributes.get(i) + CSConstants.SPACE + productValues.get(i));
-            }
-        }
-        for (String s : combined) {
-            sb.append(s);
-            sb.append(CSConstants.LINE_SEPERATOR);
-        }
-        return sb;
     }
 
     private String formatPrice(String p) {

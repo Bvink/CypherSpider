@@ -5,6 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import tornado.org.core.api.utils.Combiner;
 import tornado.org.cypherspider.constants.CSConstants;
 import tornado.org.cypherspider.objects.Product;
 import tornado.org.neo4j.ProductDatabase;
@@ -65,8 +66,8 @@ public class MycomCrawler {
 				.append(CSConstants.EURO)
 				.append(product.getPrice())
 				.append(CSConstants.LINE_SEPERATOR)
-				.append(combineValues(product.getAttributes(),
-						product.getValues()));
+				.append(Combiner.combineLists(product.getAttributes(),
+                        product.getValues()));
 
 		return sb;
 	}
@@ -90,24 +91,6 @@ public class MycomCrawler {
 			productSpecs.add(data.get(data.size() - 2).text());
 			productValues.add(data.get(data.size() - 1).text());
 		}
-	}
-
-	private StringBuilder combineValues(List<String> productAttributes,
-			List<String> productValues) {
-		List<String> combined = new ArrayList<>();
-		StringBuilder sb = new StringBuilder();
-		if (productAttributes.size() == productValues.size()) {
-			for (int i = 0; i < productAttributes.size()
-					&& i < productValues.size(); i++) {
-				combined.add(productAttributes.get(i) + CSConstants.SPACE
-						+ productValues.get(i));
-			}
-		}
-		for (String c : combined) {
-			sb.append(c).append(CSConstants.LINE_SEPERATOR);
-		}
-
-		return sb;
 	}
 
 	private String getProductName(Document doc) throws Exception {

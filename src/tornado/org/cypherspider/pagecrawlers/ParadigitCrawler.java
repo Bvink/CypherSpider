@@ -4,6 +4,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import tornado.org.core.api.utils.Combiner;
 import tornado.org.cypherspider.constants.CSConstants;
 import tornado.org.cypherspider.objects.Product;
 import tornado.org.neo4j.ProductDatabase;
@@ -59,9 +60,6 @@ public class ParadigitCrawler {
         String productNumber;
         Elements es = doc
                 .getElementsByClass(CSConstants.ITEMDETAIL_SUMMARY_CLASS);
-
-        productNumber = es.get(es.size() - 1)
-                .getElementsByTag(CSConstants.SPAN).get(0).text();
         productNumber = es.get(es.size() - 1)
                 .getElementsByTag(CSConstants.SPAN).get(1).text();
 
@@ -80,7 +78,7 @@ public class ParadigitCrawler {
                 .append(CSConstants.EURO)
                 .append(product.getPrice())
                 .append(CSConstants.LINE_SEPERATOR)
-                .append(combineValues(product.getAttributes(),
+                .append(Combiner.combineLists(product.getAttributes(),
                         product.getValues()));
 
         return sb;
@@ -119,24 +117,6 @@ public class ParadigitCrawler {
         product.setAttributes(productAttributes);
         product.setValues(productValues);
 
-    }
-
-    private StringBuilder combineValues(List<String> productAttributes,
-                                        List<String> productValues) {
-        List<String> combined = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
-        if (productAttributes.size() == productValues.size()) {
-            for (int i = 0; i < productAttributes.size()
-                    && i < productValues.size(); i++) {
-                combined.add(productAttributes.get(i) + CSConstants.SPACE
-                        + productValues.get(i));
-            }
-        }
-        for (String c : combined) {
-            sb.append(c).append(CSConstants.LINE_SEPERATOR);
-        }
-
-        return sb;
     }
 
     private String getProduct(Document doc) throws Exception {
