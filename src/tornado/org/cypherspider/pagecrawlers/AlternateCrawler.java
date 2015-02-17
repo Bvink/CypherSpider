@@ -70,7 +70,7 @@ public class AlternateCrawler {
 
     private StringBuilder includeInfo(StringBuilder sb, String productNumber) {
         sb.append(CSConstants.WEBSITE_STR)
-                .append(CSConstants.PARADIGIT_URL)
+                .append(CSConstants.ALTERNATE_URL)
                 .append(CSConstants.LINE_SEPERATOR)
                 .append(CSConstants.PRODUCT_NUMBER_STR)
                 .append(productNumber)
