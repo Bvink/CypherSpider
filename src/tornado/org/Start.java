@@ -43,15 +43,19 @@ public class Start {
                 startAlternateCrawler();
                 //startMycomCrawler();
                 startParadigitCrawler();
+                System.out.println("Crawl mode go!");
                 break;
             case "alternate":
                 startAlternateCrawler();
+                System.out.println("Alternate mode go!");
                 break;
             case "paradigit":
                 startParadigitCrawler();
+                System.out.println("Paradigit mode go!");
                 break;
             case "debug":
                 Application.launch(Gui.class, (String[]) null);
+                System.out.println("Debug mode go!");
                 break;
             default:
                 System.out.println("Please supply an argument!");

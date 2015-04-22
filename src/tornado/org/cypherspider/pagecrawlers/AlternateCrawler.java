@@ -157,14 +157,17 @@ public class AlternateCrawler {
     }
 
     private String getProduct(Document doc) throws Exception {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getElementText(CSConstants.BRAND_ELEMENT, doc))
-                .append(CSConstants.SPACE)
-                .append(doc.select(CSConstants.META_ELEMENT).get(CSConstants.ALTERNATE_META_INDEX).attr(CSConstants.CONTENT_ELEMENT));
-        return sb.toString();
+        String selector = CSConstants.PRODUCT_NAME_SELECTOR_ALTERNATE;
+        Elements elements = doc.select( selector );
+        return elements.get(0).text();
     }
 
     private String getPrice(Document doc) throws Exception {
         return formatPrice(getElementText(CSConstants.PRICE_ELEMENT, doc));
     }
 }
+
+
+
+
+

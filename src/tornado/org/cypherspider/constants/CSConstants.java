@@ -38,6 +38,7 @@ public class CSConstants {
     public static final String PRODUCT_TYPE_SELECTOR_PARADIGIT = "div.breadcrumbcontainer:nth-child(3) > a:nth-child(1)";
 
     public static final String PRODUCT_TITLE_CONTAINER = "itemdetail-producttitlecontainer";
+    public static final String PRODUCT_NAME_SELECTOR_ALTERNATE = ".productNameContainer > h1:nth-child(3) > span:nth-child(2)";
     public static final String PRICE_PLACEHOLDER = "ctl00_ContentPlaceHolder1_itemDetail_salespriceIncludingVATPriceLabel_pricePlaceHolder";
 
     public static final String SPEFICIATION_CLASS = "product_specification fullwidth";
